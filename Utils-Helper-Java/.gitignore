@@ -83,6 +83,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/application.yml
+/src/main/resources/springboot/application.yml
 !/src/main/resources/*.example
 /src/main/resources/*.key

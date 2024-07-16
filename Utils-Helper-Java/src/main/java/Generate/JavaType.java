@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 public enum JavaType {
@@ -27,7 +28,7 @@ public enum JavaType {
 
     public static JavaType convertStringValueToEnum(String value) {
         return Arrays.asList(JavaType.values()).stream()
-                .filter(javaType -> javaType.getValue().equals(value))
+                .filter(jt -> Objects.equals(jt.getValue(), value))
                 .findFirst().orElse(null);
     }
 }

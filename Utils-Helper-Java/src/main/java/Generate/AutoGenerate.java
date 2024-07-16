@@ -9,10 +9,9 @@ import java.util.Objects;
 @Slf4j
 public class AutoGenerate {
 
-
     public String generateBuilderEntityForTest(Object ob) {
         if (Objects.isNull(ob)) return "";
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append(this.getClazzName(ob)).append(".builder()");
 
         Field[] fields = ob.getClass().getDeclaredFields();
