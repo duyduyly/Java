@@ -9,7 +9,8 @@ import java.util.Objects;
 @Slf4j
 public class AutoGenerate {
 
-    public String generateBuilderEntityForTest(Object ob) {
+    //Just generate Object Data, Example: Integer, Float, Double
+    public String generateBuilder(Object ob) {
         if (Objects.isNull(ob)) return "";
         StringBuilder result = new StringBuilder();
         result.append(this.getClazzName(ob)).append(".builder()");
@@ -19,9 +20,10 @@ public class AutoGenerate {
         for (Field field : fields) {
             String type = field.getType().getName();
             JavaType javaType = JavaType.convertStringValueToEnum(type);
-            key = setValue(javaType);
-
-            result.append(".").append(field.getName()).append("(").append(key).append(")");
+            if (Objects.nonNull(javaType)) {
+                key = setValue(javaType);
+                result.append(".").append(field.getName()).append("(").append(key).append(")").append("\n");
+            }
         }
         result.append(".build();");
 
@@ -33,7 +35,7 @@ public class AutoGenerate {
         String key;
         switch (javaType) {
             case LONG:
-                key = String.valueOf(CreateObject.randomLong());
+                key = CreateObject.randomLong() + "L";
                 break;
             case BIG_DECIMAL:
                 key = "BigDecimal.valueOf(\"" + CreateObject.randomDouble() + "\")";
@@ -42,7 +44,7 @@ public class AutoGenerate {
                 key = "new Date()";
                 break;
             case STRING:
-                key = CreateObject.faker().random().hex();
+                key = "\""+CreateObject.faker().random().hex()+"\"";
                 break;
             case BOOLEAN:
                 key = "true";
@@ -57,7 +59,7 @@ public class AutoGenerate {
                 key = "new ArrayList<>()";
                 break;
             default:
-                key = "0";
+                key = null;
                 break;
         }
         return key;

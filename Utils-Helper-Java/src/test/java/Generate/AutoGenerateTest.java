@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class AutoGenerateTest {
 
-    private AutoGenerate autoGenerate;
+    private final AutoGenerate autoGenerate;
 
     public AutoGenerateTest() {
         autoGenerate = new AutoGenerate();
@@ -14,6 +14,6 @@ public class AutoGenerateTest {
     @Test
     public void generateBuilderEntityForTest() {
         Entity entity = new Entity();
-        autoGenerate.generateBuilderEntityForTest(entity);
+        String Builder = autoGenerate.generateBuilder(entity);
     }
 }

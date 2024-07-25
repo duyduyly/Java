@@ -18,9 +18,9 @@ public class ValidateTest {
     @Test
     public void _null_FilledEntity_Success() throws InvocationTargetException, IllegalAccessException {
         Entity entity = Entity.builder()
-                .field1("1231")
-                .field2(123)
-                .field3(123D)
+                .stringField("1231")
+                .intField(123)
+                .doubleField(123D)
                 .build();
 
         validate._null(entity);
@@ -30,9 +30,9 @@ public class ValidateTest {
     @Test
     public void _null_Field1IsNull_ThrowException() {
         Entity entity = Entity.builder()
-                .field1(null)
-                .field2(123)
-                .field3(123D)
+                .stringField(null)
+                .intField(123)
+                .doubleField(123D)
                 .build();
 
         Assert.assertThrows(Exception.class, () -> {
