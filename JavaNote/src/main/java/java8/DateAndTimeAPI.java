@@ -10,8 +10,11 @@ import java.util.Map;
 
 /**
  * LocalDate
+ *  - (Represents a date (year, month, day) without a time-zone.)
  * LocalTime
+ *  - Represents a time (hours, minutes, seconds, nanoseconds) without a date and without a time-zone.
  * LocalDateTime
+ *  - Combines LocalDate and LocalTime into a single date-time object without a time-zone.
  */
 public class DateAndTimeAPI {
 
