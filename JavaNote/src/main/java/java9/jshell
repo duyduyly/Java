@@ -1,0 +1,25 @@
+////Oracle Corp has introduced a new tool called “jshell”. It stands for Java Shell and also known as REPL (Read Evaluate Print Loop)
+// open cmd to run to try
+
+C:\Users\ADMIN>jshell --> the first
+|  Welcome to JShell -- Version 11.0.16
+|  For an introduction type: /help intro
+
+//and then
+jshell> int a = 10
+
+a ==> 10
+
+jshell> System.out.println("a value = " + a");
+|  Error:
+|  unclosed string literal
+|  System.out.println("a value = " + a");
+|                                     ^
+
+jshell> System.out.println("a value = " +"a");
+a value = a
+
+jshell> System.out.println("a value = " +a);
+a value = 10
+
+jshell>
