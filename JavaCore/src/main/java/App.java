@@ -1,9 +1,12 @@
+import clazz.beyond_clazz.enums.Compass2;
+
 import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-        Random rand = new Random();
-        helloWorld(rand, 100, 0);
+
+        System.out.println(Compass2.SOUTH.getDirection());
+
     }
 
     private static void helloWorld(Random rand, int value, int retry) {
