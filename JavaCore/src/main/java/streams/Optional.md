@@ -1,9 +1,3 @@
-# Streams
-
-Menu:
-
-- [Using Optional](#using-optional)
-
 ## Using Optional
 
 what is optional?
@@ -153,50 +147,4 @@ Exception in thread "main" java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.get(Optional.java:143)
 	at streams.optional.App.main(App.java:27)
 
-```
-
-## Stream 
-
-# Java Stream Terminal Operations
-
-| Method             | Description                                                       | Return Type         |
-|--------------------|-------------------------------------------------------------------|---------------------|
-| `forEach()`        | Performs an action for each element in the stream                 | `void`              |
-| `forEachOrdered()` | Like `forEach`, but preserves encounter order in parallel streams | `void`              |
-| `toArray()`        | Collects elements into an array                                   | `Object[]` or `T[]` |
-| `reduce()`         | Combines elements using an associative accumulation function      | `Optional<T>` / `T` |
-| `collect()`        | Performs a mutable reduction (e.g., collecting into a List)       | Collector result    |
-| `min()`            | Returns the minimum element by comparator                         | `Optional<T>`       |
-| `max()`            | Returns the maximum element by comparator                         | `Optional<T>`       |
-| `count()`          | Returns the number of elements in the stream                      | `long`              |
-| `anyMatch()`       | Checks if **any** element matches a predicate                     | `boolean`           |
-| `allMatch()`       | Checks if **all** elements match a predicate                      | `boolean`           |
-| `noneMatch()`      | Checks if **no** elements match a predicate                       | `boolean`           |
-| `findFirst()`      | Returns the **first** element (if any)                            | `Optional<T>`       |
-| `findAny()`        | Returns **any** element (especially useful for parallel streams)  | `Optional<T>`       |
-
-
-
-# Reduce 
-```java
-        //merge all name
-        List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
-
-        //normal way
-        String allName = "";
-        for (String name : names) allName += name;
-        System.out.println(allName);
-
-        //use reduce
-        String useReduce = names.stream().reduce("", (s1, s2) -> s1 + s2);
-        System.out.println(useReduce);
-
-        //use reduce and conCat reference method
-        String useReduceReferenceMethod = names.stream().reduce("", String::concat);
-        System.out.println(useReduceReferenceMethod);
-```
-```bash
-AliceBobCharlieDavid
-AliceBobCharlieDavid
-AliceBobCharlieDavid
 ```
