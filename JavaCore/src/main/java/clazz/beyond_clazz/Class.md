@@ -1,6 +1,11 @@
 ## Beyond classes
 
-# Enum
+1. [Enum](#enum)
+2. [Sealed Class](#sealed-class)
+3. [Records](#records)
+4. [Nested class](#nested-class)
+
+## Enum
 What is the enum?
 - Enum (enumeration) is a fixed set of constants 
 - Enum provides type-safe checking
@@ -68,7 +73,7 @@ public class App {
 }
 ```
 
-# Sealed Class
+## Sealed Class
 - Used to restrict which other classes may directly extend your class
 - New keywords, `sealed`, `non-sealed`, `permits`
 - Sealed classes __must be declared in the same package__ as it's direct subclass
@@ -113,7 +118,7 @@ _Example about interface_
     
 ```
 
-# Records
+## Records
 What are records?
 - encapsulated classes, but without boilerplate code
 - the encapsulation is secured
@@ -178,7 +183,7 @@ public class App {
 }
 ```
 
-# Nested class
+## Nested class
 what is nested class?
 ==> Nested class is a class defined within another class
 
