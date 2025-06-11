@@ -1,21 +1,21 @@
-package interface_.private_method;
+package clazz.interface_.private_method;
 
-interface Car{
-    private static int calculateSpeed(){
-        int speed = 70*20;
+interface Car {
+    private static int calculateSpeed() {
+        int speed = 70 * 20;
         return speed;
     }
 
-     public default int getSpeed(){
+    public default int getSpeed() {
         return calculateSpeed();
     }
 
-    public default int getRecommendedSpeed(){
-        return (int) (calculateSpeed()*0.8);
+    public default int getRecommendedSpeed() {
+        return (int) (calculateSpeed() * 0.8);
     }
 }
 
-class MyClass implements Car{
+class MyClass implements Car {
 
 }
 

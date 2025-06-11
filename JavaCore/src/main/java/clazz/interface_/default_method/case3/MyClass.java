@@ -1,4 +1,4 @@
-package interface_.default_method.case3;
+package clazz.interface_.default_method.case3;
 
 //Both Interfaces Have the Same Default Method
 //must provide implementation method in class, because Java do not know which default method

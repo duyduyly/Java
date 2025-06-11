@@ -1,4 +1,4 @@
-package interface_.default_method.case1;
+package clazz.interface_.default_method.case1;
 
 interface Vehicle {
     void start();  // Abstract method (must be implemented)

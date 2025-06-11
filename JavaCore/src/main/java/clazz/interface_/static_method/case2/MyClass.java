@@ -1,4 +1,4 @@
-package interface_.static_method.case2;
+package clazz.interface_.static_method.case2;
 
 //static method in interface do not override because show method belong interface
 interface InterfaceA {

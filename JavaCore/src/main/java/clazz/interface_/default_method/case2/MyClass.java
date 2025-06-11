@@ -1,4 +1,4 @@
-package interface_.default_method.case2;
+package clazz.interface_.default_method.case2;
 
 //Both Interfaces Have the Same Abstract Method
 // No conflict occurs because MyClass implements the method explicitly

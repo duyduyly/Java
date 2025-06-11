@@ -98,7 +98,7 @@ _Example_
 
 ```
 
-_Example about interface_
+_Example about clazz.interface_
 `Class dog can not implement Mammal through Interface Eats` **(need check this case again)**
 ```java
     //Interface Sealed also be made sealed:

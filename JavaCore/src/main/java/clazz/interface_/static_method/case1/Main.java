@@ -1,4 +1,4 @@
-package interface_.static_method.case1;
+package clazz.interface_.static_method.case1;
 
 
 interface Vehicle {

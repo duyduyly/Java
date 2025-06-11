@@ -1,4 +1,4 @@
-package interface_.default_method.case5;
+package clazz.interface_.default_method.case5;
 
 //Since InterfaceB has only an abstract method, MyClass must provide its own implementation.
 //must provide implementation method because Interface B show method is abstract method
