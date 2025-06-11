@@ -3,7 +3,7 @@
 ## Keyword:
 | [Theory](#theory) | [Interface Fields](#interface-fields) | [Functional Interface](#functional-interfaces) | </br>
 | [Default Method](#default-method) | [Static Method](#static-method) | [Private Method](#private-method-java-9) |</br>
-| [Sealed Interface](#sealed-interface) | [Marker Interface](#marker-interfaces) | [Interface Inheritance Extending](#interface-inheritance-extending-other-interfaces)
+| [Sealed Interface](#sealed-interface) | [Marker Interface](#marker-interfaces) | [Interface Inheritance Extending](#interface-inheritance-extending-other-interfaces) |
 
 ----------
 ## Theory
@@ -13,7 +13,7 @@
 - It is used to achieve abstraction and `multiple inheritance` in Java.
 - It supports loose coupling (classes depend on behavior, not implementation).
 - In other words, interfaces primarily define methods that other classes must implement.
-- An interface in Java defines a set of `behaviours` that a class `can implement`, usually representing an IS-A relationship, but not always in every scenario.
+- An interface in Java defines a set of `behaviours` that a class `can implement`, usually representing an `IS-A relationship`, `but not always in every scenario`.
 
 --------
 ## Interface Fields
@@ -147,6 +147,7 @@ public interface Serializable {}
 
 --------
 ##  Interface Inheritance (Extending Other Interfaces)
+- Special thing can extend multiple interface
 ```java
 interface Flyable {
     void fly();

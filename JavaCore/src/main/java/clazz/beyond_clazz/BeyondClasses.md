@@ -1,9 +1,8 @@
 ## Beyond classes
 
-1. [Enum](#enum)
-2. [Sealed Class](#sealed-class)
-3. [Records](#records)
-4. [Nested class](#nested-class)
+| [Enum](#enum) | [Sealed Class](#sealed-class) | [Records](#records) | </br>
+| [Nested class](#nested-class) |
+
 
 ## Enum
 What is the enum?
