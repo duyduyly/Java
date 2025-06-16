@@ -1,16 +1,19 @@
 # Class
 
 ## keyword
-| [Inheritance](#inheritance) | [Super](#super) | [This](#this-and-this) | [Class Modifier](#class-modifiers) |</br>
-| [Object Class](#object-class) | [Order of Initialization](#order-of-initialization) | [Constructors](#constructors) | </br>
+| [Inheritance](#1-inheritance) | [Super](#2-super) | [This](#3-this-and-this) | [Class Modifier](#4-class-modifiers) |</br>
+| [Object Class](#5-object-class) | [Order of Initialization](#6-order-of-initialization) | [Constructors](#7-constructors) | </br>
+| [Static Members](#8-static-members)| [Boxing and Unboxing](#9-boxing-and-unboxing) | [Inheriting Methods](#10-inheriting-methods) |
 
-
-## Inheritance
+## 1. Inheritance
 - Java Supports single Inheritance
   - class can only one Direct SupperClass
   - (unlike in some other languages, Like C++)
 - But Class can implement multiple interfaces
-### Super
+
+<br />
+
+## 2. Super
 - `super()` is used to call the constructor of the `superclass` (parent class).
 - If there is no explicit `this()` or `super()` in the first line of the `constructor`
   - the compiler will insert `super()` at the `beginning` of every `constructor`
@@ -61,8 +64,9 @@ public class Test {
 
 ```
 
-------------------------
-### This() and This
+<br />
+
+## 3. This() and This
 ### 🔹`This`:
 - `this` is a reference to the `current object`
 ```java
@@ -116,16 +120,20 @@ public class Student {
 }
 
 ```
-----------------------
- 
-## Class Modifiers
+
+<br />
+
+## 4. Class Modifiers
 - Final 
 - abstract
 - static
 - sealed  (java 17)
 - non-sealed (java 17)
 
-## Object Class
+
+<br />
+
+## 5. Object Class
 - All Java Classes implicitly inherit from java.lang.Object class
 - Object is the only class which doesn't have a parent class
 ```java
@@ -136,7 +144,9 @@ public class Student {
 - Every class has access to methods defines in Object class
   - e.g. toString(), equals(), hashCode(), etc.
 
-## Order of Initialization
+<br />
+
+## 6. Order of Initialization
 ```java
     public class Dog{
     
@@ -251,7 +261,9 @@ Child instance block
 Child constructor
 ```
 
-## Constructors
+<br />
+
+## 7. Constructors
 - Special methods which are called every time you create an instance of an object 
 ```java
   public class Dog{
@@ -352,7 +364,236 @@ class Dog {
 LocalDate now = LocalDate.now();
 ```
 
+<br />
+
+## 8. Static Members
+- In Java, a `static member` belongs to the `class itself`, not to any specific object.
+- __That means:__ All instances share the same static member.
+- You can access it without creating an object of the class.
+- Types of Static Members
+  - `Static Variable` (Class Variable)
+  - `Static Method`
+  - `Static Block`
+  - `Static Nested Class`
+
+```java
+public class Example{
+  static int count; //static variable
+  
+  public Example() {
+    count++;
+  }
+
+  //static method
+  public static void greet() {
+    System.out.println("Hello!");
+  }
+  
+  //static block
+  static {
+     count = 0;
+  }
+
+  //Static Nested Class
+  static class Inner {
+    public void show() {
+      System.out.println("Inside static nested class");
+    }
+  }
+}
+
+public class App{
+  public static void main(String[] args) {
+     
+    //Static variable 
+    System.out.println("Before Count: "+Example.count);
+    new Example();
+    System.out.println("After Count: "+Example.count);
+    
+    //static method
+    Example.greet();
+
+    //Nested static  Class
+    Outer.Inner obj = new Outer.Inner();
+    obj.show();
+    
+  }
+}
+```
+
+<br />
+
+## 9. Boxing and Unboxing
+- Boxing: converting a primitive into its wrapper class
+  - (putting primitive in the "box")
+- Unboxing: converting a wrapper class to a primitive
+  - (getting a primitive out of the "box")
+```java
+// explicit
+int a = 3;
+Integer b = Integer.valueOf(a);
+// int -> Integer (boxing)
+int c = b.intValue();
+// Integer -> int (unboxing)
+```
+
+```java
+// implicit
+int a = 3;
+Integer b = a;
+// int -> Integer (autoboxing)
+int c = b;
+// Integer -> int (unboxing)
+```
+
+```java
+// Java will also autocast a smaller primitive into the larger one
+// BUT Java will not do both automatic operations at the same time!!
+
+int x = 7;
+long y = x;
+// autocasting, OK
+
+Long z = x;
+// autocasting and autoboxing cannot be done at once => NOK!
+```
+
+```java
+// if you need both autocasting and autoboxing,
+// one of these operations should be done by hand (or both)
+
+int x = 7;
+
+// explicit boxing (w/ autocasting)
+Long z = Long.valueOf(x);
+
+// explicit casting (w/ autoboxing)
+Long z = (long) x;
+
+// explicit everything
+Long z = Long.valueOf((long)x);
+```
+```java
+// be careful when working with primitive literals
+
+Long x = 10;
+//=> NOK, autocasting and autoboxing is required
+
+Long y = 10L;
+//=> OK, only autoboxing is required
+```
+
+<br />
+
+## 10. Inheriting Methods
+- `subclass` can override an `inherited method`
+  -  subclass declares `a new implementation `for an inherited method
+  - with` same signature` (name & parameters)
+  - and `covariant return type`
+-  the property of the object to take many different forms is called `polymorphism`
+
+```java
+class Mammal{
+    public void speak(){
+      System.out.println("Mammal sound");
+    }
+}
+
+class Dog extends Mammal{
+  @Override
+  public void speak() {
+    System.out.println("Woof!");
+    super.speak(); // can use supper to call method of ParentClass
+  }
+}
+```
+
+------------
+#### Method Overriding Rules
+1. Overriden method must have `the same signature` as superclass method
+2. Overriden method must be at least `as accessible` as the original method
+3. Overriden method may not declare a checked exception that is
+   `new or broader` then the one in the original method
+4. Return type of overriden method must be `the same or a subtype`
+   of the return type of the original method (covariant return types)
 
 
+__Covariant return types:__
+```java
+class Item { 
+  protected Number calculatePrice (float price) { 
+    return price + price * 0.2; 
+  } 
+} 
 
+ public class Shoe extends Item {  
+  @Override //Double is subtype of Number
+  public Double calculatePrice (float shoePrice) { 
+    return (shoePrice + shoePrice * 0.2) * 1.05; 
+  } 
+  public static void main(String[] args) { 
+    System.out.println(new Item().calculatePrice(100)); 
+    System.out.println(new Shoe().calculatePrice(100)); 
+  } 
+}
+```
 
+__Exceptions:__
+```java
+// checked exception FileNotFoundException is subclass of IOException 
+class A { 
+  public void greet() throws IOException { } 
+  public void sayHello() { } 
+  public void leave() {} throws FileNotFoundException {}  
+}
+
+public class B extends A {
+  public void greet() throws FileNotFoundException { } //OK
+  public void sayHello() throws IOException { } //NOK
+  public void leave() throws IOException { } //NOK
+}
+```
+----------
+#### Overriding private and static methods
+-  if the method is private, it's not visible to other classes
+   - the method with the same signature is subclass is independent of that method
+   -  this is not overriding, it's just completely different method
+
+- it the method is static, "overriden" method must also be declared static
+  - this is not overriding, since every method belongs to its own class
+  - this is called hiding the method
+- methods marked as final cannot be overriden nor hidden !!
+
+----------
+#### Hiding a static method
+```java
+class A { 
+  public static void greet() { System.out.println("Hello."); } 
+} 
+public class B extends A { 
+ 
+  @Override //putting here would result with compilation error!
+  public static void greet() { System.out.println("Good afternoon."); } 
+  public static void main(String[] args) { 
+    A.greet(); 
+    B.greet(); 
+  } 
+}
+```
+----------
+#### Variables cannot be overriden, only hidden
+```java
+class Mammal { 
+  public String name = "Unknown"; 
+} 
+public class Dog extends Mammal { 
+  public String name = "Rex"; //Dog's name "hides" Mammal's name
+
+  public static void main(String[] args) {   
+    Dog d = new Dog(); 
+    Mammal m = d;   //the reference is of the type Mammal, pointing to Dog object
+    System.out.println(d.name); 
+    System.out.println(m.name); 
+  }
+}
+```
