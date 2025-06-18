@@ -1,11 +1,8 @@
 # Collections
-## Link
-- [Common](#common)
-- [List](#list)
-- [Set Interface](#set-interface)
-- [Queue Interface](#queue-interface)
-- [Map Interface](#map-interface)
-- [Sorting](#sorting)
+## Keyword
+| [Common](#common) | [List](#list) | [Set Interface](#set-interface) | <br/>
+| [Queue Interface](#queue-interface) | [Deque Interface](#deque-interface) | [Deque interface as Double-ended Queue](#deque-interface-as-double-ended-queue) |<br/>
+| [Map Interface](#map-interface) | [Sorting](#sorting) | <br/>
 
 ## Common
 __What is Collection?__
@@ -28,18 +25,19 @@ A Collection is a framework that provides a set of classes and interfaces for st
 - interface Map doesn't implement Collection
 - classes HashMap and ThreeMap implement Map interface
 
-##
+<br/>
+
 Diamond operator (<>) is used to imply the type of the element in collection
 ```Java
  List<String> names = new ArrayList<>(); // it's ok
 ```
-- You don't need to define Type for right side, for Collection can automatic understanding
-##
+- You don't need to define Type for right side, for Collection can automatic understanding <br/>
 But not on the left-hand side!
 ```Java
 List<> names = new ArrayList<String>();// does not compile
 ```
-##
+<br/>
+
 If you use __var__ you __have to specify the type on right-hand side__:
 - ArrayList
   - add() ==> return boolean
@@ -65,7 +63,8 @@ System.out.println(namesInSet.add("Join")) //==> true
 System.out.println(namesInSet.add("Join"))//==> false
 //because Set doesn't allow duplicates
 ```
-##
+<br/>
+
 Remove method
 ```Java
 Collection<String> names = new ArrayList<>();
@@ -79,7 +78,8 @@ System.out.println(names); //==> [Alan, Join] only the first match is removed
 
 System.out.println(names.remove("Luka")); // false because Luka doesn't exist in ArrayList
 ```
-##
+<br/>
+
 removeIf() method
 
 ```Java
@@ -92,7 +92,8 @@ names.add("Join");
 names.removeIf(s -> s.length() > 4); // use predicate as an argument, implemented by lambda expression
 System.out.println(names); //==> [Join, Join] // remove all element have length greater than 4
 ```
-##
+<br/>
+
 forEach() method
 
 ```Java
@@ -106,11 +107,14 @@ names.forEach(name -> System.out.println(name + ", ")); // takes Consumer as an 
 ```
 
 __Result__
-```bash
+```text
 Join, Alan1, Alan2, Join, 
 ```
 
-#
+<br/>
+
+-----------------------------
+
 ## List
 
 what is a List?
@@ -151,7 +155,7 @@ public class MyClass {
 }
 ```
 __Result:__
-```bash
+```text
     [Join, Ben, Like] //because the list is "backed" by the array
     [Join, George, Like] // no change 
     [Join, George, Like] // no change
@@ -175,7 +179,7 @@ public class MyClass {
 }
 ```
 __Result:__
-```bash
+```text
 [Join, George, Paul]
 [Join, George, Paul]
 ```
@@ -203,7 +207,8 @@ ArrayList<String> arrayList3 = new ArrayList<String>(5);
 //==> you have reserved 5 slots, but you can always add more if you want
 ```
 
-#
+<br/>
+
 __List methods__
 - add(E element)
 - add(int index, E element)
@@ -229,6 +234,7 @@ public class MyClass {
     }
 }
 ```
+<br/>
 
 __1.Add__
 ```Java
@@ -236,9 +242,11 @@ __1.Add__
         System.out.println(names);
 ```
 Result:
-```bash
+```text
 [Join, Alan, George, Paul, Ringo] //index 1 changed from George to Alan
 ```
+
+<br/>
 
 __2.Set__
 ```Java
@@ -247,10 +255,11 @@ System.out.println("Before: "+names.get(2));
         System.out.println("After: "+names.get(2));
 ```
 Result:
-```bash
+```text
 Before: George
 After: Alan2
 ```
+<br/>
 
 __3.Remove__
 ```Java
@@ -261,7 +270,7 @@ __3.Remove__
         System.out.println("Remove Join: "+names);
 ```
 Result:
-```bash
+```text
     Remove George at index 1: [Join, Paul, Ringo]
     Remove Join: [Paul, Ringo]
 ```
@@ -282,7 +291,7 @@ Special case __Remove ArrayList reserved Interger__:
         System.out.println(numbers);
 ```
 Result:
-```bash
+```text
 [2, -11, 7]
 [2, -11]
 [-11, 7]
@@ -293,6 +302,8 @@ __what element will be removed, 2 or 7?__
 - if you want to remove element 2, you must use Integer.valueOf(2), for Integer.valueOf() will be converted from primitive type to object
 - and remove(E element) will be used
 
+<br/>
+
 __4.ReplaceAll__
 ```Java
         names.replaceAll(String::toUpperCase);
@@ -302,11 +313,12 @@ __4.ReplaceAll__
         System.out.println(names);
 ```
 Result:
-```bash
+```text
 [JOIN, GEORGE, PAUL, RINGO]
 [join, george, paul, ringo]
 ```
-#
+<br/>
+
 __Convert List to Array using toArray() methods__
 ```Java
 List<Integer> myList = new ArrayList<>();
@@ -319,7 +331,9 @@ Integer[] intArray = myList.toArray(new Integer[0]);
 //=> array Integer
 //=> initial size is 0, but Java will automatically adJust sizes to fit
 ```
-#
+<br/>
+
+-------------------
 ## Set Interface
 
 - doesn't allow duplicate entries
@@ -343,7 +357,7 @@ __HashSet Example:__
         System.out.println(names);
 ```
 _Result_
-```bash
+```text
 true
 true
 false // false because John existed in Set
@@ -363,7 +377,7 @@ __TreeSet Example:__
 ```
 
 _Result_
-```bash
+```text
 true
 true
 false // false because John existed in Set
@@ -396,7 +410,7 @@ true
 ```
 
 _Result:_
-```bash
+```text
 [blue, green, red, yellow]
 blue
 [green, red, yellow]
@@ -418,7 +432,7 @@ __What happen when you use poll() and peek() with the queue empty?__
         System.out.println(colors.poll());
         System.out.println(colors.peek());
 ```
-```bash
+```text
 blue
 green
 red
@@ -455,14 +469,14 @@ null
         colors.pop();
         System.out.println(colors.peek());
 ```
-```bash
+```text
 [yellow, red, blue, green]
 yellow
 red
 null
 ```
 
-# Deque interface as Double-ended Queue
+## Deque interface as Double-ended Queue
 - can use deque as a queue and opposite
 - proper method:
   - peedFirst(), offerFirst(E e), poolFirst()
@@ -487,7 +501,7 @@ null
         System.out.println(nums.peekLast());
 ```
 
-```bash
+```text
 [-11, 9, 5] //nums
 -11 //nums.getFirst()
 5 //nums.peekLast()
@@ -498,7 +512,7 @@ null
 
 ## Map Interface
 
-__Map methods__
+__Map methods:__
 
 | Method | Use                                                                                                       |                                                                
 | ----------------- |-----------------------------------------------------------------------------------------------------------|
@@ -530,101 +544,117 @@ __Map methods__
     map.put(3, "Charlie");
 ```
 
-## Clear
+<br/>
+
+### Clear
 ```java
     System.out.println(map);
     map.clear();
     System.out.println(map);
 ```
-```bash
+```text
 {1=Alan, 2=Bob, 3=Charlie}
 {}
 ```
+<br/>
 
-## ContainsKey
+### ContainsKey
 ```java
     System.out.println(map.containsKey(1));
     System.out.println(map.containsKey(4));
 ```
-```bash
+```text
 true
 false
 ```
+<br/>
 
-## ContainsValue
+### ContainsValue
 ```java
     System.out.println(map.containsValue("Alan"));
     System.out.println(map.containsValue("Bob Junior"));
 ```
-```bash
+```text
 true
 false
 ```
 
-## EntrySet
+<br/>
+
+### EntrySet
 ```java
     for (Map.Entry<Integer, String> entry : map.entrySet()) {
         System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
     }
 ```
-```bash
+```text
 Key: 1, Value: Alan
 Key: 2, Value: Bob
 Key: 3, Value: Charlie
 ```
 
-## ForEach
+<br/>
+
+### ForEach
 ```java
     map.forEach((key, value) -> {
         System.out.println(key + " : " + value);
     });
 ```
-```bash
+```text
 1 : Alan
 2 : Bob
 3 : Charlie
 ```
+<br/>
 
-## Get
+### Get
 ```java
     System.out.println(map.get(1));
     System.out.println(map.get(5));
 ```
-```bash
+```text
 Alan
 null
 ```
+<br/>
 
-## GetOrDefault
+### GetOrDefault
 ```java
     System.out.println(map.getOrDefault(2, "Alan"));
     System.out.println(map.getOrDefault(6, "Charlie Smith"));
 ```
-```bash
+```text
 Bob
 Charlie Smith
 ```
 
-## IsEmpty
+<br/>
+
+### IsEmpty
 ```java
     System.out.println(map.isEmpty());
     map.clear();
     System.out.println(map.isEmpty());
 ```
-```bash
+```text
 false
 true
 ```
 
-## KeySet
+<br/>
+
+### KeySet
 ```java
     System.out.println(map.keySet());
 ```
-```bash
+```text
 [1, 2, 3]
 ```
 
-## Merge
+<br/>
+
+### Merge
 V merge(K key, V value, BiFunction<V, V, V> remappingFunction)
 ```java
     // Example 1: Word Counting
@@ -651,13 +681,15 @@ V merge(K key, V value, BiFunction<V, V, V> remappingFunction)
 
     System.out.println(numbers); // {}
 ```
-```bash
+```text
 {banana=1, apple=2}
 {greeting=Hello World}
 {}
 ```
 
-## Put
+<br/>
+
+### Put
 put(K key, V value)
 ```java
     Map<Integer, String> map = new HashMap<>();
@@ -666,71 +698,260 @@ put(K key, V value)
     map.put(3, "Charlie");
     System.out.println(map);
 ```
-```bash
+```text
 {1=Alan, 2=Bob, 3=Charlie}
 ```
 
-## PutIfAbsent
+<br/>
+
+### PutIfAbsent
 ```java
     map.putIfAbsent(2,"Demo"); // because key 2 existed
     map.putIfAbsent(4,"Demo4");
     System.out.println(map);
 ```
-```bash
+```text
   {1=Alan, 2=Bob, 3=Charlie, 4=Demo4}
 ```
 
-## Remove
+<br/>
+
+### Remove
 ```java
     System.out.println(map.remove(1,"Alan2")); // remove fail because value "Alan2" do not exist
     System.out.println(map.remove(1,"Alan")); // remove for key and value
     System.out.println(map.remove(2)); // remove by key
     System.out.println(map);
 ```
-```bash
+```text
 false
 true
 Bob
 {3=Charlie}
 ```
 
-## Replace
+<br/>
+
+### Replace
 ```java
     System.out.println(map.replace(1, "Alan replace")); // will return old value and return
     System.out.println(map.replace(4, "new")); // return null, and nothing
     System.out.println(map);
 ```
-```bash
+```text
 Alan
 null
 {1=Alan replace, 2=Bob, 3=Charlie}
 ```
 
-## ReplaceAll
+<br/>
+
+### ReplaceAll
 replaceAll((key, value) -> newValue)
 ```java
     map.replaceAll((key, value) -> value.toUpperCase());
     System.out.println(map);
 ```
-```bash
+```text
 {1=ALAN, 2=BOB, 3=CHARLIE}
 ```
 
-## Size
+<br/>
+
+### Size
 ```java
     System.out.println(map.size());
 ```
-```bash
+```text
 3
 ```
 
-## Values
+<br/>
+
+### Values
 ```java
   System.out.println(map.values());
 ```
-```bash
+```text
  [Alan, Bob, Charlie]
 ```
-#
+<br/>
+
+---------------------------
+
 ## Sorting
-watching again
+- we are already partly familiar with sort() method
+- if elements in the collection are primitives, they are sorted by natural order
+- if elements are Strings, then numbers sort before letters, and uppercase letters
+  sort before lowercase letters
+- in order to do this you can choose one of two approaches
+  1. use a class which implements Comparable<T> interface, or
+  2. pass the implementation of Comparator<T> interface in sort() method
+
+
+### Comparable<T> interface
+- this interface has one abstract method: int compareTo(T o)
+  - these methods have to be implemented in a concrete class
+- this method returns an integer according to these rules:
+  1. if the current object is equivalent to the argument it returns 0
+  2. if the current object is smaller than the argument it returns a negative number
+  3. if the current object is larger than the argument it returns a positive number
+
+```java
+public class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    @Override
+    public String toString() {
+      return "{" +
+              "name='" + name + '\'' +
+              ", age=" + age +
+              '}' +"\n";
+    }
+}
+```
+
+Sort by age:
+```java
+    //sort by age
+    @Override
+    public int compareTo(Person o) {
+        return this.age - o.age;
+    }
+    //0 if ages are equal
+    // <0 if age is smaller than age in the argument
+    //>0 if age is greater than age in the argument
+```
+```text
+[{name='Alan', age=25}
+, {name='Peter', age=29}
+, {name='Z', age=40}
+, {name='Hero', age=50}
+]
+```
+
+Sort by name:
+```java
+    //sort by name
+    @Override
+    public int compareTo(Person o) {
+        return this.name.compareTo(o.name);
+    }
+    //String class has the implementation of compareTo() Method
+    // , so you can just use it here
+```
+
+```text
+[{name='Alan', age=25}
+, {name='Hero', age=50}
+, {name='Peter', age=29}
+, {name='Z', age=40}
+]
+```
+
+Main Class:
+```java
+public static void main(String[] args) {
+        List<Person> people = new ArrayList<Person>();
+        people.add(new Person("Alan", 25));
+        people.add(new Person("Peter", 29));
+        people.add(new Person("Z", 40));
+        people.add(new Person("Hero", 50));
+
+        Collections.sort(people);
+        System.out.println(people.toString());
+    }
+```
+
+### Use Comparator<T> interface with Lambda expression
+- in the last example we had to define a criterium for sorting when designing a
+  class Person (either by name or age)
+- but what if we don't want to make that commitment?
+  - i.e. what if we want to sort by name in one case, and by age in another?
+- in that case we can use Comparator<T> interface
+  - and provide the implementation for compare(T o1, T o2) method
+- this implementation is than passed to sort() method
+  - to do this we usually use lambda expression or method reference
+
+
+```java
+public class Person { //no implements Comparable
+  private String name; 
+  private int age; 
+  public Person(String name, int age) {  
+    this.name = name;  
+    this.age = age;  
+  } 
+  public String getName() { return name; } 
+  public int getAge() { return age; } 
+  // toString() implementation 
+}
+public class Main {
+  public static void main(String[] args) {
+    List<Person> people = Arrays.asList(
+            new Person("John", 25),
+            new Person("George", 20),
+            new Person("Ben", 30)
+    );
+    
+    //sort by age
+    Collections.sort(people, (p1, p2) -> p1.getAge() - p2.getAge());
+    System.out.println(people);
+
+    
+    //sort by name
+    Collections.sort(people, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+    System.out.println(people);
+  }
+}
+
+```
+
+### Same thing without lambda (the old way) 
+
+```java
+public class Main { 
+  public static void main(String[] args) { 
+    List<Person> people = Arrays.asList( 
+      new Person("John", 25), new Person("George", 20), new Person("Ben", 30)); 
+    Comparator<Person> byAge = new Comparator<Person>() { 
+      public int compare (Person p1, Person p2) { 
+        return p1.getAge() - p2.getAge(); 
+      } 
+    }; 
+    Collections.sort(people, byAge); 
+    System.out.println(people); 
+  }
+ }
+
+```
+// using comparing() method with method reference
+```java
+// to sort by name
+Comparator<Person> c = Comparator.comparing(Person::getName);
+
+// to sort by name in reversed order
+Comparator<Person> c = Comparator.comparing(Person::getName).reversed();
+
+// to sort by name and then by age (if names are the same) 
+Comparator<Person> c =
+        Comparator.comparing(Person::getName).thenComparingInt(Person::getAge);
+
+
+```
+
+### Comparable vs. Comparator Summary
+|                                  | Comparable  | Comparator |
+|----------------------------------|-------------|------------|
+| package name (for import)        | java.lang   | java.util  |
+| must me implemented by a class   | Yes         | No         |
+| method name in interface         | compareTo() | compare()  |
+| number of method parameters      | 1           | 2          |
+| usually used with lambda         | No          | Yes        |
+
