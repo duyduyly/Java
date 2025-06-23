@@ -1,21 +1,12 @@
-import clazz.beyond_clazz.enums.Compass2;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
 
-        System.out.println(Compass2.SOUTH.getDirection());
-        try {
-            int[] a = {-7,11,3};
-            printFourthElement(a);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        helloWorld(new Random(), 23, 0);
     }
 
     private static void printFourthElement(int[] a){

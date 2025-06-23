@@ -5,20 +5,20 @@
 
 ## 📋 Intermediate Operations Table
 
-| #  | **Method**         | **Description**                                      | **Jump to Example**                |
-|----|---------------------|-----------------------------------------------------|------------------------------------|
-| 1  | `filter()`          | Filters elements by predicate                       | [Example 1](#example-1-filter)     |
-| 2  | `map()`             | Transforms each element                             | [Example 2](#example-2-map)        |
-| 3  | `flatMap()`         | Flattens nested streams                             | [Example 3](#example-3-flatmap)    |
-| 4  | `distinct()`        | Removes duplicate elements                          | [Example 4](#example-4-distinct)   |
-| 5  | `sorted()`          | Sorts elements (natural order or comparator)        | [Example 5](#example-5-sorted)     |
-| 6  | `peek()`            | Performs an action without modifying the stream     | [Example 6](#example-6-peek)       |
-| 7  | `limit()`           | Truncates stream to max size                        | [Example 7](#example-7-limit)      |
-| 8  | `skip()`            | Skips the first N elements                          | [Example 8](#example-8-skip)       |
-| 9  | `mapToInt()`        | Converts objects to IntStream                       | [Example 9](#example-9-maptoint)   |
-| 10 | `mapToLong()`       | Converts objects to LongStream                      | [Example 10](#example-10-maptolong)|
-| 11 | `mapToDouble()`     | Converts objects to DoubleStream                    | [Example 11](#example-11-maptodouble)|
-| 12 | `boxed()`           | Boxes primitive stream to object stream            | [Example 12](#example-12-boxed)    |
+| #  | **Method**            | **Description**                                      | **Jump to Example**                          |
+|----|-----------------------|------------------------------------------------------|----------------------------------------------|
+| 1  | `filter()`            | Filters elements by predicate                        | [Example 1](#example-1-filter)               |
+| 2  | `map()`               | Transforms each element                              | [Example 2](#example-2-map)                  |
+| 3  | `flatMap()`           | Flattens nested streams                              | [Example 3](#example-3-flatmap)              |
+| 4  | `distinct()`          | Removes duplicate elements                           | [Example 4](#example-4-distinct)             |
+| 5  | `sorted()`            | Sorts elements (natural order or comparator)         | [Example 5](#example-5-sorted)               |
+| 6  | `peek()`              | Performs an action without modifying the stream      | [Example 6](#example-6-peek)                 |
+| 7  | `limit()`             | Truncates stream to max size                         | [Example 7](#example-7-limit)                |
+| 8  | `skip()`              | Skips the first N elements                           | [Example 8](#example-8-skip)                 |
+| 9  | `mapToInt()`          | Converts objects to IntStream                        | [Example 9](#example-9-maptoint)             |
+| 10 | `mapToLong()`         | Converts objects to LongStream                       | [Example 10](#example-10-maptolong)          |
+| 11 | `mapToDouble()`       | Converts objects to DoubleStream                     | [Example 11](#example-11-maptodouble)        |
+| 12 | `boxed()`             | Boxes primitive stream to object stream              | [Example 12](#example-12-boxed)              |
 
 ---
 

@@ -11,17 +11,17 @@ what is optional?
 
 the method in optional
 
-| Method                           | Parameter | Description                                       |                                                                
-|----------------------------------|-----------|---------------------------------------------------|
-| [`.of()`](#of)                   | Object    | Add Object non-null into optional                 |
-| [`.empty()`](#empty)             |           | create a Optional empty                           |
-| [`.ofNullable()`](#ofNullable)   | Object    | Add Object into optional and allow nullable value |
-| [`.orElse()`](#orElse)           | Object    | Return or Else Value if Optional is Empty or null |
-| [`.orElseGet()`](#orElseGet)     | Object    | Return or Else Value if Optional is Empty or null |
-| [`.orElseThrow()`](#orelsethrow) | Supplier  | Throws exception if value is empty.               |                                       |
-| [`.map()`](#map)                 | Function  | Transforms value if present.                      |                                       |
-| [`.flatMap()`](#flatmap)         | Function  | Like map but avoids nested Optionals.             |                                       |
-| [`.filter()`](#filter)           | Predicate | Returns same Optional if predicate matches.       |                                       |
+| Method                             | Parameter | Description                                       |                                                                
+|------------------------------------|-----------|---------------------------------------------------|
+| [`.of()`](#of)                     | Object    | Add Object non-null into optional                 |
+| [`.empty()`](#empty)               |           | create a Optional empty                           |
+| [`.ofNullable()`](#ofNullable)     | Object    | Add Object into optional and allow nullable value |
+| [`.orElse()`](#orElse)             | Object    | Return or Else Value if Optional is Empty or null |
+| [`.orElseGet()`](#orElseGet)       | Object    | Return or Else Value if Optional is Empty or null |
+| [`.orElseThrow()`](#orelsethrow)   | Supplier  | Throws exception if value is empty.               |                                       |
+| [`.map()`](#map)                   | Function  | Transforms value if present.                      |                                       |
+| [`.flatMap()`](#flatmap)           | Function  | Like map but avoids nested Optionals.             |                                       |
+| [`.filter()`](#filter)             | Predicate | Returns same Optional if predicate matches.       |                                       |
 
 - import java.util.Optional;
 
