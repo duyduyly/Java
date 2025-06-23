@@ -28,7 +28,7 @@ public class App{
   public class Variables {
 
     public static final int DEFAULT_OLD = 0; // Final must be assigned when you initialize
-    public static int old; //Do not assign a value, for default value is O
+    public static int old_package; //Do not assign a value, for default value is O
     public static double amount; // Do not assign a value, for default value is OD
     public int old2;
 
@@ -37,7 +37,7 @@ public class App{
       var.demo();
 
       System.out.println("Static Final: " + DEFAULT_OLD + " Final must be assigned when you initialize");
-      System.out.println("Int Static : " + old);
+      System.out.println("Int Static : " + old_package);
       System.out.println("Double Final: " + amount);
       System.out.println("Instance Value: " + var.old2);
     }
@@ -78,14 +78,14 @@ public class Variables {
     System.out.println("Static Final: " + DEFAULT_OLD + " Final must be assigned when you initialize");
   }
 
-  public static int old; //Do not assign a value, for default value is O
+  public static int old_package; //Do not assign a value, for default value is O
     public static double amount; // Do not assign a value, for default value is OD
     public int old2;
 
     public static void main(String[] args) {
         Variables var = new Variables();
 
-        System.out.println(old);
+        System.out.println(old_package);
         System.out.println(amount);
         System.out.println(var.old2);
     }

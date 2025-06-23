@@ -70,7 +70,7 @@ Stream.iterate(0,n ->n +2).limit(5).forEach(System.out::println);  // Outputs 0,
     }
 ```
 
-> ⚠️ Requires `import java.nio.file.*;` and `import java.io.*;`
+> ⚠️ Requires `import java.nio.file.*;` and `import java.io_nio2.*;`
 
 ---
 

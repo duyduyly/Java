@@ -121,9 +121,9 @@ public record Student (String firstName, String lastName, int id) {
 #
 #### Methods in Records
 ```java
-public static record Student2 (String firstName, String lastName, int old, int id) {
+public static record Student2 (String firstName, String lastName, int old_package, int id) {
     public boolean isMature() {
-        return this.old > 18;
+        return this.old_package > 18;
     }
 }
 ```

@@ -734,7 +734,7 @@ Bob
 
 ### Replace
 ```java
-    System.out.println(map.replace(1, "Alan replace")); // will return old value and return
+    System.out.println(map.replace(1, "Alan replace")); // will return old_package value and return
     System.out.println(map.replace(4, "new")); // return null, and nothing
     System.out.println(map);
 ```
@@ -913,7 +913,7 @@ public class Main {
 
 ```
 
-### Same thing without lambda (the old way) 
+### Same thing without lambda (the old_package way) 
 
 ```java
 public class Main { 

@@ -71,10 +71,10 @@ public class Test {
 - `this` is a reference to the `current object`
 ```java
 public class Car {
-    String model;
+    String old_package.model;
 
-    public Car(String model) {
-        this.model = model; // 'this.model' refers to the instance variable
+    public Car(String old_package.model) {
+        this.old_package.model = old_package.model; // 'this.old_package.model' refers to the instance variable
     }
 
   public Car getCar() {
@@ -83,7 +83,7 @@ public class Car {
 
   public void printInfo() {
         //'this' refers to instance variable in class 
-    System.out.println(this.model);
+    System.out.println(this.old_package.model);
   }
 }
 ```
@@ -115,7 +115,7 @@ public class Student {
     }
 
     public void printInfo() {
-        System.out.println(this.name + " is " + this.age + " years old.");
+        System.out.println(this.name + " is " + this.age + " years old_package.");
     }
 }
 

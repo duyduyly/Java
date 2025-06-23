@@ -34,7 +34,7 @@
 
 `Not ok`
 ```java
-        import java.io.FileNotFoundException;try{
+        import java.io_nio2.FileNotFoundException;try{
 FileInputStream inputStream = new FileInputStream("sdsd");
         }catch(IOException |FileNotFoundException e2){} //for FileNotFoundException is Subclass of IOException
 ```
@@ -88,7 +88,7 @@ public static void main(String[] args) {
 - should use when Open connecting Database File and etc
 
 ```java
-  import java.io.FileInputStream;
+  import java.io_nio2.FileInputStream;
 
 public void readFile(String file) {
   try (FileInputStream is = new FileInputStream("path") // fileInputStream will automatic closing
