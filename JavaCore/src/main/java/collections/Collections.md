@@ -514,25 +514,25 @@ null
 
 __Map methods:__
 
-| Method | Use                                                                                                       |                                                                
-| ----------------- |-----------------------------------------------------------------------------------------------------------|
-| [Clear](#clear) | Clears all data in the map                                                                                |
-| [ContainsKey](#containsKey) | Checks if the key is in the map                                                                           |
+| Method                          | Use                                                                                                       |                                                                
+|---------------------------------|-----------------------------------------------------------------------------------------------------------|
+| [Clear](#clear)                 | Clears all data in the map                                                                                |
+| [ContainsKey](#containsKey)     | Checks if the key is in the map                                                                           |
 | [ContainsValue](#containsValue) | Checks if the value is in the map                                                                         |
-| [EntrySet](#entrySet) | Return Set of key/Value pairs                                                                             |
-| [ForEach](#forEach) |                                                                                                           |
-| [Get](#get) | Return value mapped with key, or null if none exists                                                      |
-| [GetOrDefault](#getOrDefault) | Same as get, but returns defaultValue if key doesn't exist                                                |
-| [IsEmpty](#isEmpty) | Checks if map is empty                                                                                    |
-| [KeySet](#keySet) | Returns Set of all keys                                                                                   |
-| [Merge](#merge) | Sets value if key doesn't exits, runs func if key is set to determine new value, removes if value is null |
-| [Put](#put) | Adds or replaces k/v pair, returns previous value or null                                                 |
-| [PutIfAbsent](#putIfAbsent) | If key not present adds value and returns null (other) |
-| [Remove](#remove) | Remove element in the map,Can remove for key, key and value                                         |
-| [Replace](#replace) |  Replaces value for given key if key is set, return original value or null if none exist|
-| [ReplaceAll](#replaceAll) | Replaces each value with results of function |
-| [Size](#size) | Return size of the map |
-| [Values](#values) | Return Collection of values |
+| [EntrySet](#entrySet)           | Return Set of key/Value pairs                                                                             |
+| [ForEach](#forEach)             |                                                                                                           |
+| [Get](#get)                     | Return value mapped with key, or null if none exists                                                      |
+| [GetOrDefault](#getOrDefault)   | Same as get, but returns defaultValue if key doesn't exist                                                |
+| [IsEmpty](#isEmpty)             | Checks if map is empty                                                                                    |
+| [KeySet](#keySet)               | Returns Set of all keys                                                                                   |
+| [Merge](#merge)                 | Sets value if key doesn't exits, runs func if key is set to determine new value, removes if value is null |
+| [Put](#put)                     | Adds or replaces k/v pair, returns previous value or null                                                 |
+| [PutIfAbsent](#putIfAbsent)     | If key not present adds value and returns null (other)                                                    |
+| [Remove](#remove)               | Remove element in the map,Can remove for key, key and value                                               |
+| [Replace](#replace)             | Replaces value for given key if key is set, return original value or null if none exist                   |
+| [ReplaceAll](#replaceAll)       | Replaces each value with results of function                                                              |
+| [Size](#size)                   | Return size of the map                                                                                    |
+| [Values](#values)               | Return Collection of values                                                                               |
 
 
 

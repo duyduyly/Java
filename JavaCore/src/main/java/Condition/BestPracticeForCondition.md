@@ -111,22 +111,22 @@ String result = processorMap.getOrDefault(type, this::processDefault).apply(inpu
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern                         | Reason                        |
-|-------------------------------------|-------------------------------|
-| Deeply nested `if-else`             | Hard to read                  |
-| Complex ternary expressions         | Reduces clarity               |
-| Repeated conditional code blocks    | Harder to maintain            |
-| Side-effects inside conditionals    | Makes testing difficult       |
+|--------------------------------------|-------------------------------|
+| Deeply nested `if-else`              | Hard to read                  |
+| Complex ternary expressions          | Reduces clarity               |
+| Repeated conditional code blocks     | Harder to maintain            |
+| Side-effects inside conditionals     | Makes testing difficult       |
 
 ---
 
 ## Summary Table
 
-| Scenario                            | Recommended Practice         |
-|------------------------------------|------------------------------|
-| Simple true/false condition        | Ternary operator             |
-| Multi-branch logic                 | `if-else` or `switch`        |
-| Value-based assignment             | `switch` expression (Java 12+)|
-| Complex logic                      | Helper methods               |
-| Null/optional checks               | `Optional`                   |
-| Strategy-based assignment          | `Map<String, Function>`      |
-| Avoiding nesting                   | Guard clauses                |
+| Scenario                            | Recommended Practice           |
+|-------------------------------------|--------------------------------|
+| Simple true/false condition         | Ternary operator               |
+| Multi-branch logic                  | `if-else` or `switch`          |
+| Value-based assignment              | `switch` expression (Java 12+) |
+| Complex logic                       | Helper methods                 |
+| Null/optional checks                | `Optional`                     |
+| Strategy-based assignment           | `Map<String, Function>`        |
+| Avoiding nesting                    | Guard clauses                  |
