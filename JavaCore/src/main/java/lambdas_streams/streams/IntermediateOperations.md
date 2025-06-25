@@ -9,7 +9,7 @@
 |----|-----------------------|------------------------------------------------------|----------------------------------------------|
 | 1  | `filter()`            | Filters elements by predicate                        | [Example 1](#example-1-filter)               |
 | 2  | `map()`               | Transforms each element                              | [Example 2](#example-2-map)                  |
-| 3  | `flatMap()`           | Flattens nested streams                              | [Example 3](#example-3-flatmap)              |
+| 3  | `flatMap()`           | Flattens nested lambdas_streams.streams                              | [Example 3](#example-3-flatmap)              |
 | 4  | `distinct()`          | Removes duplicate elements                           | [Example 4](#example-4-distinct)             |
 | 5  | `sorted()`            | Sorts elements (natural order or comparator)         | [Example 5](#example-5-sorted)               |
 | 6  | `peek()`              | Performs an action without modifying the stream      | [Example 6](#example-6-peek)                 |

@@ -145,6 +145,6 @@ Java
 false
 Exception in thread "main" java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.get(Optional.java:143)
-	at streams.optional.App.main(App.java:27)
+	at lambdas_streams.streams.optional.App.main(App.java:27)
 
 ```

@@ -1,4 +1,4 @@
-package streams.optional;
+package lambdas_streams.streams.optional;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

@@ -1,9 +1,7 @@
-package lambdas_functional_programing.method_reference;
+package lambdas_streams.lambdas.method_reference;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
