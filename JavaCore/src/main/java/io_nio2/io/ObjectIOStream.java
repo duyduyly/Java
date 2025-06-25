@@ -1,14 +1,11 @@
 package io_nio2.io;
 
-import io_nio2.Constant;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectIOStream {
@@ -29,7 +26,7 @@ public class ObjectIOStream {
         read.forEach(System.out::println);
         System.out.println("---------------------------");
         write("src/resource/file/ObjectOutput.dat", people.get(0));
-        Person person = readObject("src/resource/file/ObjectOutput.dat");
+        Person person = readPerson("src/resource/file/ObjectOutput.dat");
         System.out.println(person);
 
     }
@@ -50,6 +47,14 @@ public class ObjectIOStream {
         }
     }
 
+    public static void write(String filePath, Object ob) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            oos.writeObject(ob);
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing to file", e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public static List<Person> read(String filePath) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
@@ -65,12 +70,20 @@ public class ObjectIOStream {
     }
 
 
-    public static Person readObject(String filePath) {
+    public static Person readPerson(String filePath) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
                 if (ois.readObject() instanceof Person person) {
                     return person;
                 }
             throw new RuntimeException("Content invalid");
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Error reading to file", e);
+        }
+    }
+
+    public static Object readObject(String filePath) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            return ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Error reading to file", e);
         }

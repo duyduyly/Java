@@ -3,7 +3,8 @@ __(Working with File)__
 
 ### Keyword
 | [InputStream](#inputstream) | [Reader And Writer for Text](#readers-and-writers-for-text) | [Abstract Class InputStream](#abstract-class-inputstream) | <br/>
-| [Abstract Class Reader](#abstract-class-reader) | [Abstract Class Writer](#abstract-class-writer) |
+| [Abstract Class Reader](#abstract-class-reader) | [Abstract Class Writer](#abstract-class-writer) | [Console Class](#console-class) | <br/>
+| [Serialization](#serialization) |
 
 #
 
@@ -191,3 +192,191 @@ Class here: [BufferReaderAndWriter.java](io/BufferReaderAndWriter.java)
     }
 ```
 Class here: [BufferReaderAndWriter.java](io/BufferReaderAndWriter.java)
+
+#
+### Console Class
+- class java.io.Console is designed for interacting with the user
+- this class is a singleton
+  - using factory method we create one and only instance of this class
+- the constructors of Console class are private
+- i.e. created using factory methods, not with new keyword
+
+__Example:__
+```java
+import java.io.Console;
+import java.util.Arrays;
+
+public class MyConsoleExample {
+    
+    //create a file and cd into folder and run
+    public static void main(String[] args) {
+        Console console = System.console();
+
+        if (console == null) {
+            System.out.println("No console available");
+        } else {
+            char[] password = console.readPassword("Enter your password: ");
+            char[] repeatPassword = "Alan123".toCharArray();
+
+            if (Arrays.equals(password, repeatPassword)) {
+                console.writer().println("-".repeat(30));
+                console.format("Hello %s!%n", "Alan");
+            } else {
+                console.writer().println("-".repeat(30));
+                console.writer().println("Wrong Password!");
+                console.writer().flush();
+            }
+        }
+    }
+}
+```
+
+__If you run on intelliJ:__
+```text
+No console available
+```
+
+__Run Console:__
+
+- javac <class name>.java //compile .java to .class
+- java <Class name> //run main file
+```bash
+D:\>javaC MyConsoleExample.java
+D:\>java MyConsoleExample
+```
+```text
+D:\>java MyConsoleExample
+Enter your password:
+
+------------------------------
+Hello Alan!
+
+D:\>java MyConsoleExample
+Enter your password:
+
+------------------------------
+Wrong Password!
+
+```
+
+
+# 
+### Serialization
+- Serialization in Java is process of convert from Object to Byte Array to:
+  - Write to file (Ex: `.dat`, `ser`)
+  - Send through the network
+  - Store in memory (cache, session)
+  - Transmit among chanel (client to server)
+#
+#### Serialization and De-serialization
+- `serialization` is `the process of saving in-memory` Java `object` in the `physical file`
+- de-serialization is the opposite: `reading` from file and `creating` Java object
+- to make a class `serializable`:
+  -  it must implement the `marker interface Serializable` (marker interface is an interface which has no methods)
+  - when serializing the object,` only instance members` are serialized (`not static`)
+#
+#### serialVersionUID
+- a special field in serializable classes which is serialized even though it's static:
+```java
+private static final long serialVersionUID = 1L;
+```
+- this field serves as a `unique identifier` for `each class` in (de)serialization process
+- during `deserialization` JVM checks if the `serialVersionUID` of the loaded
+  class is the same as the `serialVersionUID` of the serialized object
+  - if they `match`, it means that the `two versions of the class are compatible`
+  - if they `don't match`, the JVM `throws an InvalidClassException`
+#
+#### Transient Fields
+- if you `don't want` a `field` to be `serialized`, you can mark it as `transient`, e.g.
+```java
+ private transient String myPassword;
+```
+- when being `deserialized`, `transient field` will `revert` to it's `default` Java `value`
+  (null for String, 0 for int, false for boolean, etc.)
+- if you have `instance variables` in your `serializable class`, `make sure` that `these
+  objects` are also `marked` as `serializable`, e.g.
+- if you want to `serialize class` Student which has an `instance variable` of type
+  Address, you have to `make Address` class `serializable` as well
+- __remember: only non-transient instance members will be serialized!__
+
+#
+__Student Class:__
+```java
+import lombok.Getter;
+
+import java.io.Serializable;
+import java.util.UUID;
+
+@Getter
+public class Student implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    //don't want a field to be serialized
+    private transient String id;
+    private String name;
+    private int age;
+
+    public Student(String Name, int Age) {
+        this.id = UUID.randomUUID().toString();
+        this.name = Name;
+        this.age = Age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [ID=" + id + ", Name=" + name + ", Age=" + age + "]";
+    }
+}
+```
+
+#
+__Example 1:__
+```java
+public static void main(String[] args) {
+  Student alan = new Student("Alan", 25);
+
+  //covert from Java Object to Byte Array and id marked transient
+  byte[] serialize = SerializationUtils.serialize(alan);
+  System.out.println(SerializationUtils.deserialize(serialize));
+}
+```
+```text
+Student [ID=null, Name=Alan, Age=25]
+```
+#
+__Example 2:__
+```java
+
+    public static void main(String[] args) {
+        Student alan = new Student("Alan", 25);
+        System.out.println("Initialize Student: " + alan);
+
+        serialize(alan, "src/resource/file/SerializationExample.dat");
+        Student deserialize = (Student) deserialize("src/resource/file/SerializationExample.dat");
+        System.out.println("Deserialize Student File: "+deserialize.toString());
+    }
+
+    public static void serialize(Object ob, String fileName){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            oos.writeObject(ob);
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing to file", e);
+        }
+    }
+
+    public static Object deserialize(String fileName){
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            return ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Error reading to file", e);
+        }
+    }
+```
+
+```text
+Initialize Student: Student [ID=5f6ef6d9-ccd7-4179-87b2-d2ba81606ab6, Name=Alan, Age=25]
+Deserialize Student File: Student [ID=null, Name=Alan, Age=25]
+```
+
+Example Class: [SerializationExample.java](serialization/SerializationExample.java)
