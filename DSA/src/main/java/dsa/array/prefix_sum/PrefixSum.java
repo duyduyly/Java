@@ -1,4 +1,4 @@
-package com.data_structure.array.prefix_sum;
+package dsa.array.prefix_sum;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.data_structure.array.gcd;
+package dsa.array.gcd;
 
 //https://leetcode.com/problems/greatest-common-divisor-of-strings/description/?envType=study-plan-v2&envId=leetcode-75&fbclid=IwAR1023OuMZZOVYghHCPL6rcrkITkC-o9rAX0ktjHpGVFB4efBof18i2HfnM
 public class Gcd {

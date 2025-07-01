@@ -1,4 +1,4 @@
-package com.data_structure.array.hsl;
+package dsa.array.hsl;
 
 import java.util.Arrays;
 import java.util.HashMap;
