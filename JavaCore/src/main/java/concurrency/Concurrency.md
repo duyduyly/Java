@@ -1,5 +1,9 @@
 ## Concurrency
 
+| [Basic Terminology](#basic-terminology) | [Thread Concurrency](#thread-concurrency) | [Thread life cycle](#threads-life-cycle) | <br/>
+| [Creating thread](#creating-thread) | [Thread Methods](#thread-methods)  | [Concurrency Api](#concurrency-api) | <br/>
+| [Future instance](#futurev-instance) | [Future Interface Methods](#futurev-interface-methods) | [Callable Interface](#callable-interface) | <br/>
+| [Scheduler Task](#scheduling-tasks) | [Scheduling Thread Pool](#scheduling-thread-pool) | [Atomic Class](#atomic-class)
 
 ## Basic Terminology
 - __Thread__ - `smallest unit of execution` that can be scheduled by the OS
@@ -273,3 +277,116 @@ __Example:__
 | `ExecutorService newCachedThreadPool()`                                   | creates thread pool that creates new threads as needed, but reuses previously constructed threads when they are available             |
 | ` ExecutorService newFixedThreadPool(int noOfThreads)`                    | creates thread pool that reuses fixed number of threads operating off shared unbounded queue                                          |
 | ` ScheduledExecutorService newScheduledThreadPool(int noOfThreads)`       | reates thread pool that can schedule commands to run after given delay or execute periodically                                        |
+
+## Atomic Class
+**For Example:**
+````java
+public static void countWithPrimitive() {
+        var thread1 = new Thread(() -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                counter++;
+            }
+        });
+
+        var thread2 = new Thread(() -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                counter++;
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(counter);
+    }
+````
+```text
+1159966
+```
+
+- why counter is not 2_000_000?
+- __Complain:__
+  - …it’s not a single atomic operation. It actually breaks down into 3 steps:
+    1. Read the value of counter from memory.
+    2. Increment the value.
+    3. Write the new value back to memory.
+  - When both threads are doing this at the same time, they may read the same value before either writes it back, so one update gets lost.
+
+
+__Example of Race Condition__
+
+- Let's say counter = 10, and both threads do this:
+  - Thread 1 reads 10, increments to 11.
+  - Thread 2 also reads 10, increments to 11.
+  - `Both write 11` → but the correct result should’ve been 12.
+- This kind of lost update leads to a final result less than 2,000,000.
+- ==> `(two thread run parallel and new back in memory 11, so counter less than 2_000_000)`
+
+
+### `Fix this one `
+- you can use Atomic Integer
+```java
+    public static void countWithAtomicClass() {
+        var thread1 = new Thread(() -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                atomicCounter.incrementAndGet();
+            }
+        });
+
+        var thread2 = new Thread(() -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                atomicCounter.incrementAndGet();
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Atomic Counter: "+atomicCounter);
+    }
+```
+```text
+Atomic Counter: 2000000
+```
+
+- In Java, Atomic classes are part of the java.util.concurrent.atomic package and are designed to safely perform operations on single variables in a multithreaded environment without using synchronization.
+### Atomic class Table
+| Class                           | Description                                    |
+|---------------------------------|------------------------------------------------|
+| `AtomicInteger`                 | Atomic operations for `int` values             |
+| `AtomicLong`                    | For `long` values                              |
+| `AtomicBoolean`                 | For `boolean` values                           |
+| `AtomicReference<T>`            | For objects of type `T`                        |
+| `AtomicIntegerArray`            | Atomic operations on arrays of `int`           |
+| `LongAdder` / `LongAccumulator` | Better than `AtomicLong` under high contention |
+
+### Atomic Methods
+| Method                                  | Description                                                                                 | Example & Result                                                  |
+|-----------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| `get()`                                 | Returns the current value.                                                                  | `ai.get()` → returns `10` if current value is `10`.               |
+| `set(int newValue)`                     | Sets to the given value.                                                                    | `ai.set(5)` → value becomes `5`.                                  |
+| `getAndSet(int newValue)`               | Atomically sets to new value and returns old value.                                         | `ai.getAndSet(100)` → returns old (e.g. `5`), now value is `100`. |
+| `incrementAndGet()`                     | Atomically increments by 1 and returns the new value.                                       | `ai.incrementAndGet()` on 10 → returns `11`.                      |
+| `getAndIncrement()`                     | Returns current value, then increments by 1.                                                | `ai.getAndIncrement()` on 10 → returns `10`, now is `11`.         |
+| `decrementAndGet()`                     | Atomically decrements by 1 and returns the new value.                                       | `ai.decrementAndGet()` on 10 → returns `9`.                       |
+| `getAndDecrement()`                     | Returns current value, then decrements by 1.                                                | `ai.getAndDecrement()` on 10 → returns `10`, now is `9`.          |
+| `addAndGet(int delta)`                  | Atomically adds delta and returns new value.                                                | `ai.addAndGet(5)` on 10 → returns `15`.                           |
+| `getAndAdd(int delta)`                  | Returns current value, then adds delta.                                                     | `ai.getAndAdd(5)` on 10 → returns `10`, now is `15`.              |
+| `compareAndSet(int expect, int update)` | Atomically sets to `update` if current value is `expect`.                                   | `ai.compareAndSet(10, 20)` → returns `true`, now is `20`.         |
+| `weakCompareAndSet(...)`                | Like `compareAndSet`, but may fail spuriously. Use in performance-sensitive low-level code. | Rarely used directly in application code.                         |
+
+Example class: [AtomicExample.java](atomic_class/AtomicExample.java)
