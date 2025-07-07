@@ -17,6 +17,9 @@ interface Car {
 
 class MyClass implements Car {
 
+    public int getSpeed() {
+        return 0;
+    }
 }
 
 public class Main {

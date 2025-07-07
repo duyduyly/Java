@@ -1,4 +1,4 @@
-package lambdas_functional_programing;
+package lambdas_streams.lambdas;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

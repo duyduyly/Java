@@ -43,7 +43,7 @@ __Example In Stream:__
 | Method             | Description                                                       | Return Type         |
 |--------------------|-------------------------------------------------------------------|---------------------|
 | `forEach()`        | Performs an action for each element in the stream                 | `void`              |
-| `forEachOrdered()` | Like `forEach`, but preserves encounter order in parallel streams | `void`              |
+| `forEachOrdered()` | Like `forEach`, but preserves encounter order in parallel lambdas_streams.streams | `void`              |
 | `toArray()`        | Collects elements into an array                                   | `Object[]` or `T[]` |
 | `reduce()`         | Combines elements using an associative accumulation function      | `Optional<T>` / `T` |
 | `collect()`        | Performs a mutable reduction (e.g., collecting into a List)       | Collector result    |
@@ -54,7 +54,7 @@ __Example In Stream:__
 | `allMatch()`       | Checks if **all** elements match a predicate                      | `boolean`           |
 | `noneMatch()`      | Checks if **no** elements match a predicate                       | `boolean`           |
 | `findFirst()`      | Returns the **first** element (if any)                            | `Optional<T>`       |
-| `findAny()`        | Returns **any** element (especially useful for parallel streams)  | `Optional<T>`       |
+| `findAny()`        | Returns **any** element (especially useful for parallel lambdas_streams.streams)  | `Optional<T>`       |
 
 
 # Reduce 

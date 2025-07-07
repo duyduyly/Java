@@ -1,11 +1,8 @@
-package lambdas_functional_programing.predicate;
+package lambdas_streams.lambdas.predicate;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class MyClass {
 

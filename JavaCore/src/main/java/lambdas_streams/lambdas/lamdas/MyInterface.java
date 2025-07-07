@@ -1,4 +1,4 @@
-package lambdas_functional_programing.lamdas;
+package lambdas_streams.lambdas.lamdas;
 
 //an interface which has exactly one abstract method
 //function interface can be annotated with @FunctionalInterface
