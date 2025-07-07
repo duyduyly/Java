@@ -3,7 +3,8 @@
 | [Basic Terminology](#basic-terminology) | [Thread Concurrency](#thread-concurrency) | [Thread life cycle](#threads-life-cycle) | <br/>
 | [Creating thread](#creating-thread) | [Thread Methods](#thread-methods)  | [Concurrency Api](#concurrency-api) | <br/>
 | [Future instance](#futurev-instance) | [Future Interface Methods](#futurev-interface-methods) | [Callable Interface](#callable-interface) | <br/>
-| [Scheduler Task](#scheduling-tasks) | [Scheduling Thread Pool](#scheduling-thread-pool) | [Atomic Class](#atomic-class)
+| [Scheduler Task](#scheduling-tasks) | [Scheduling Thread Pool](#scheduling-thread-pool) | [Atomic Class](#atomic-class) | <br/>
+| [Synchronized Block](#synchronized-block) | [Cyclic barrier](#cyclicbarrier) |
 
 ## Basic Terminology
 - __Thread__ - `smallest unit of execution` that can be scheduled by the OS
@@ -237,11 +238,22 @@ __Example:__ [Concurrency2.java](Concurrency2.java)
 ## Callable Interface
 - Similar to Runnable, except:
   - method you need to implement is called 'call()':
-  - call() method returns a value and can throw a checked exception
+  - `call()` method returns a value and can throw a checked exception
 - ExecutorService includes overloaded version of the submit() method
   - you can pass callable object to submit() and get Future<T> instance
 - when passing runnable, get() returns null if the task is complete
   - with Callable, get() returns the matching generic type
+
+✅ Key Features of `Callable<V>`
+
+| Feature                      | Description                      |
+|------------------------------|----------------------------------|
+| `call()` method              | Replaces `run()` from `Runnable` |
+| Returns a value              | Yes (`V` – generic type)         |
+| Can throw checked exceptions | Yes                              |
+| Often used with              | `ExecutorService`, `Future<V>`   |
+
+
 
 ## Scheduling Tasks
 | Method                                                                                | Use to                                                                                                                                            |
@@ -390,3 +402,91 @@ Atomic Counter: 2000000
 | `weakCompareAndSet(...)`                | Like `compareAndSet`, but may fail spuriously. Use in performance-sensitive low-level code. | Rarely used directly in application code.                         |
 
 Example class: [AtomicExample.java](atomic_class/AtomicExample.java)
+
+
+--------------
+## Synchronized Block
+### Synchronized Access
+- Atomic classes protect single variable
+- Synchronized access protects series of commands (block)
+-  A structure called monitor (or lock) supports mutual exclusion
+  - while the block is running, no other thread can interfere
+- Any object can be used as a monitor (existing or new one)
+- When thread tries to run the block it first checks if any other thread is running it
+  - if lock is not available, the thread will transition to BLOCKED state
+  - after the thread "acquires the lock", the single thread will enter the block
+  - while the block is executed all other threads will be prevented from entering
+
+__Synchronized Block:__
+```java
+var lock = new Object(); 
+synchronized(lock) { //lock can be any Object (existing or newly created)
+  // code which needs to be executed 
+  // one thread at a time 
+}
+```
+
+__Synchronized Methods:__
+```java
+void doSomething() { 
+  synchronized(this) { //current class (this) is used as a lock
+    // work to be executed one thread at a time 
+  } 
+}
+```
+
+__Alternative__
+```java
+syncrhonized void doSomething() { //method is marked as synchronized
+   // work to be executed one thread at a time 
+}
+```
+Example: [Counter.java](synchronized_example/Counter.java)
+
+#
+### ReentrantLock
+- part of Lock interface which allows manual control over monitors
+-  for example, it's useful when we want to check if lock is available
+  - and then maybe do something else in case it's not
+- to protect a part of code* call lock() method
+  - *to make it unavailable to other threads while one thread is using it
+- to make ti available to other threads call unlock() method
+
+__Using ReentrantLock:__
+```java
+Lock myLock = new ReentrantLock(); //creating an instance of Lock
+try { 
+   myLock.lock();
+   // work to be executed one thread at a time 
+} finally { 
+   myLock.unlock(); 
+}
+// this is equivalent to using synchronized block, 
+// but it gives you more control over the access
+```
+
+**Lock Methods**
+
+| Method                                        | Description                                                                                                                              |
+|-----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| void lock()                                   | Requires lock and blocks until lock is acquired                                                                                          |
+| void unlock()                                 | Releases a lock                                                                                                                          |
+| boolean tryLock()                             | Requests lock an returns immediately, returns boolean indicating if the lock was successfully acquired                                   |
+| boolean tryLock(long Timeout, TimeUnit unit)  | Requests lock and blocks for specified time or until lock is acquired, returned boolean indicating if the lock was successfully acquired |
+
+**Keep in mind:**
+- you can release the lock the same number of times it is acquired
+  - in other words lock/unlock always work in pairs
+- if you try to obtain the lock twice, but release it only once, you'll create an error
+- to make sure to avoid this error use tryLock() in combination with unlock()
+  - only if tryLock() returns true, call unlock()
+
+---------------
+## CyclicBarrier
+- `CyclicBarrier class` takes in its constructor a limit value
+  -  indicating the number of threads to wait for
+- As each thread finishes it calls the await() method on cyclic barrier
+- Once the specific number of threads have each called await()
+  - the barrier is released, and all threads can continue
+
+**Example:** [CyclicBarrierExample.java](CyclicBarrierExample.java)
