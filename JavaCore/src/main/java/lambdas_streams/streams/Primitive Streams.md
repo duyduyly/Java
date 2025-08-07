@@ -137,3 +137,7 @@ public static void main(String[] args) {
 -4
 27
 ```
+
+## Primitive note
+- It avoids `additional cost associated` with autoboxing/unboxing.
+- Remember that `primitive` and `object` versions of data types (i.e. int and Integer, double and Double, etc.) are `not really compatible` with each other in java. They are made compatible through the extra step of` auto-boxing`/`unboxing`. Thus, if you have a stream of primitive ints and if you try to use the object versions of Stream and Function (i.e. Stream<Integer> and Function<Integer, Integer>, you will `incur the cost of boxing and unboxing` the elements

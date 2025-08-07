@@ -2,6 +2,7 @@ Fast:
 - [Number Format](#number-format)
 - [Formating Dates And Times](#formating-dates-and-times)
 - [Internationalization](#internationalization)
+- [Note](#localization-note)
 
 
 ## Number Format📈
@@ -292,3 +293,5 @@ Croatia
 4,32 HRK
 ```
 
+### Localization Note:
+- required to construct a Locale is `language` and `country`

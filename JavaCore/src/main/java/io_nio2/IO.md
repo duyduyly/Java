@@ -380,3 +380,19 @@ Deserialize Student File: Student [ID=null, Name=Alan, Age=25]
 ```
 
 Example Class: [SerializationExample.java](serialization/SerializationExample.java)
+
+
+-------------------
+<br/>
+
+## Note:
+### System.in
+- System.in refers to the standard input stream of a Java program. It is opened when the program is started.
+  - in is a variable of java.lang.System class.
+  - `public static final InputStream in`
+  - The "standard" input stream. This stream is already open and ready to supply input data. Typically this stream corresponds to keyboard input or another input source specified by the host environment or user.
+- The `System.in` variable cannot be reassigned to any other stream directly.
+  - Although in is a final variable and so, it cannot be reassigned directly. However, System class has a public static void setIn(InputStream in) method that can be used to change in to refer to any other InputStream.
+- You can close it by calling `System.in.close();`
+- The declared type of System.in is java.io.InputStream. It refers to an object of type java.io.BufferedInputStream.
+- An InputStream is meant to read bytes. Whether these bytes are characters or not is irrelevant. A program could potentially interpret the bytes reads through this stream as characters.

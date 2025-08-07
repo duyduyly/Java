@@ -1,4 +1,5 @@
 ## ✅ Stream Creation Methods Summary
+- A source: This could be a collection, an array, a generator function, or an I/O channel.
 
 | #  | **Source**        | **Method**                                       | **Finite?** | **Description**                                                                                                                |
 |----|-------------------|--------------------------------------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------|

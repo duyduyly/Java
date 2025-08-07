@@ -1,8 +1,17 @@
 ## Beyond classes
 
-| [Enum](#enum) | [Sealed Class](#sealed-class) | [Records](#records) | </br>
-| [Nested class](#nested-class) |
+### Keywords
+- [Enum](#enum) 
+- [Sealed Class](#sealed-class) 
+- [Records](#records) 
+- [Nested class](#nested-class) 
+  1. [Inner Class](#1-inner-class) 
+  2. [Static Nested Class](#2-static-nested-class)
+  3. [Local Class](#3-local-class)
+  4. [Anonymous Class](#4-anonymous-class)
 
+--------------------------
+<br/>
 
 ## Enum
 What is the enum?
@@ -72,6 +81,8 @@ public class App {
     }
 }
 ```
+--------------------------
+<br/>
 
 ## Sealed Class
 - Used to restrict which other classes may directly extend your class
@@ -117,6 +128,8 @@ _Example about class_design.interface_
     // implement Mammal through Eats
     
 ```
+--------------------------
+<br/>
 
 ## Records
 What are records?
@@ -183,6 +196,9 @@ public class App {
 }
 ```
 
+--------------------------
+<br/>
+
 ## Nested class
 what is nested class?
 ==> Nested class is a class defined within another class
@@ -198,7 +214,7 @@ Overview:
    - Local class which doesn't have a name
 
 #
-__1. Inner class__
+### 1. Inner class
 - can have access modifier
 - can `extend another class` and/or implement interfaces
 - can be `marked  abstract or final`
@@ -208,8 +224,27 @@ __1. Inner class__
 _Example_
 in `package  class_design.beyond_clazz.nested_class.inner_class`
 
+#### Note
+- Since Java 16, `non-static nested class` i.e. inner class is allowed to `have static members`.
+- Before Java 16, they were `allowed` to have `a static field only if that field is final`.
+
+````java
+class OuterClass { 
+    public class InnerClass { 
+        static int VAL = 10; //COMPILES FINE 
+        static String STR = "1234"; //COMPILES FINE   
+        
+        static Object obj = new Object();   
+        
+        static int val2 = 10; //COMPILES FINE 
+        static final void method() {} //COMPILES FINE 
+ } }
+````
+
+
+
 #
-__2. Static Nested Class__
+### 2. Static Nested Class
 - `can't access instance` variable or methods declared in the outer class
 - you don't need an instance of the wider class to access it
 - can access directly `OuterClass.new InnerClass()`
@@ -219,7 +254,7 @@ _Example_
 in `package`
 
 #
-__Local Class__
+### 3. Local Class
 - nested class defined within the method
   - limited scoped
 - don't have access modifier
@@ -254,8 +289,9 @@ _Example_
 ```bash
 150
 ```
+
 #
-__4. Anonymous Class__
+### 4. Anonymous Class
 - special type of local class which doesn't have a name
 - must extend an existing class or implement an existing interface
 
@@ -300,6 +336,39 @@ It works with interface as well
     //but the instance of the anonymous class{}; implementing the interface
 }
 ```
+
+#### Note:
+- It can also be created for classes.
+```java
+class Greeting {
+    String name;
+
+    Greeting(String name) {
+        this.name = name;
+    }
+
+    void sayHi() {
+        System.out.println("Hello, " + name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Greeting g = new Greeting("Alice") {
+            @Override
+            void sayHi() {
+                System.out.println("Heyy " + name + ", welcome!");
+            }
+        };
+
+        g.sayHi();  // Output: Heyy Alice, welcome!
+    }
+}
+
+```
+
+-----------------
+<br/>
 
 
 

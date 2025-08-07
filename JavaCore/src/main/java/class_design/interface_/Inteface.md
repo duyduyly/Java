@@ -3,7 +3,9 @@
 ## Keyword:
 | [Theory](#theory) | [Interface Fields](#interface-fields) | [Functional Interface](#functional-interfaces) | </br>
 | [Default Method](#default-method) | [Static Method](#static-method) | [Private Method](#private-method-java-9) |</br>
-| [Sealed Interface](#sealed-interface) | [Marker Interface](#marker-interfaces) | [Interface Inheritance Extending](#interface-inheritance-extending-other-interfaces) |
+| [Sealed Interface](#sealed-interface) | [Marker Interface](#marker-interfaces) | [Interface Inheritance Extending](#interface-inheritance-extending-other-interfaces) | <br/>
+
+| [Interface Note](#interface-note) |
 
 ----------
 ## Theory
@@ -157,3 +159,6 @@ interface Bird extends Flyable {
     void buildNest();
 }
 ```
+-----------------
+## Interface Note:
+- Interfaces cannot be final.

@@ -5,7 +5,8 @@
 
 
 ## String methods
-- Strings are immutable!
+- `Strings` are `immutable`!
+- `String` class itself is `final` and so all of its methods are `implicitly final`.
 - you have to reassign the new value or create a new String
 
 | Method                                                                                         | Description                                                                                                                                        |
