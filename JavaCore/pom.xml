@@ -5,8 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>JavaCore</artifactId>
+    <artifactId>JavaCore_Parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>Common</module>
+        <module>OrderProcess</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
