@@ -30,10 +30,10 @@ public class Test {
 
     public static void main(String[] args) {
         List<StudentRecord> studentRecords = StudentRecord.generate();
-        System.out.println(studentRecords.getFirst());
+        System.out.println(studentRecords.get(0));
         try {
             System.out.println("Serialize: ");
-            System.out.println(serialize(studentRecords.getFirst()));
+            System.out.println(serialize(studentRecords.get(0)));
             System.out.println(serialize(studentRecords));
 
             System.out.println();

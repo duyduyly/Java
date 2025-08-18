@@ -1,8 +1,28 @@
 # Json
 
-- Gson
-- ObjectMapper
-- jolt.JsonUtils
+- [**Gson**](#gson)
+  - [*Gson Dependency*](#gson-dependency)
+  - [*Gson Example*](#gson-example)
+- [**Object Mapper**](#objectmapper)
+  - [*Jackson Dependency*](#jackson-dependency)
+  - [*Object Mapper Example*](#object-mapper-example)
+- [**jolt.JsonUtils**](#joltjsonutils)
+  - [*Jolt Dependency*](#jolt-dependency)
+  - [*sonUtils + Chainr to transform JSON using a spec*](#sonutils--chainr-to-transform-json-using-a-spec)
+  - [*Why this is powerful*](#-why-this-is-powerful-)
+- [**Validation Json With Javax Validation**](#validation-json-with-javax-validation)
+  - [*Validation Dependency*](#validation-dependency)
+  - [*Validation Method*](#validate-method)
+  - [*Javax Validation Annotation*](#javax-validation-annotation)
+    - [*1.Null / Not Null*](#1null--not-null)
+    - [*2. Boolean / Truth*](#2-boolean--truth)
+    - [*3. Size / Length*](#3-size--length)
+    - [*4. Numeric Constraints*](#4-numeric-constraints)
+    - [*5. String / Character*](#5-string--character)
+    - [*6. Past / Future Dates*](#6-past--future-dates)
+    - [*7. Custom Message Example*](#7-custom-message-example)
+    - [*8. More*](#8-more)
+  - [**Custom Validation Annotation**](#custom-validation-annotation)
 
 ## Gson
 - Gson is a Java library developed by Google that’s used to convert Java objects to JSON (serialization) and JSON to Java objects (deserialization).
@@ -10,6 +30,18 @@
   - Easy to use
   - And supports complex object structures, generic types, and custom serialization/deserialization.
 
+### Gson Dependency
+```pom
+<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>>2.10.1</version>
+</dependency>
+```
+
+#
+### Gson Example
 **Example:** ([Test.java](gson/Test.java))
 ```java
 import com.google.gson.Gson;
@@ -94,6 +126,16 @@ Handle Collection And Generic Type:
   - `Tree Model` → Work with JSON as a tree (JsonNode), useful for partial parsing.
   - `Streaming API` → Low-level read/write of JSON for maximum performance.
 
+### Jackson Dependency
+```pom
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.17.0</version>
+</dependency>
+```
+
+### Object Mapper Example
 **Example:** ([Test.java](jackson/Test.java))
 ```java
 import com.fasterxml.jackson.core.JsonFactory;
@@ -232,7 +274,7 @@ public class Test {
 - Jolt is best known for letting you transform JSON structures using a declarative "spec" (a JSON file describing how to map/reshape data)
 - The `JsonUtils` class provides basic JSON handling helpers so you don’t have to set up your own parser.
 
-### Dependency
+### Jolt Dependency
 ```pom
 <dependency>
     <groupId>com.bazaarvoice.jolt</groupId>
@@ -259,7 +301,7 @@ public class Test {
 | `JsonUtils.prettyPrintJson(Object)`   | Convert object to pretty-printed JSON string             |
 
 ### sonUtils + Chainr to transform JSON using a spec
-[input.json](../../resources/jolt_json/input.json)
+[input.json](jolt_json/input.json)
 ```json
 {
   "name": "Alice",
@@ -267,7 +309,7 @@ public class Test {
   "city": "Hanoi"
 }
 ```
-[spec.json](../../resources/jolt_json/spec.json)
+[spec.json](jolt_json/spec.json)
 ```json
 [
   {
@@ -348,3 +390,318 @@ Alice
 - Jolt supports more than shift — it has `default`, `remove`, `modify-overwrite-beta`, etc.
 - You can build complex JSON reshaping without changing Java code.
 
+
+--------------------
+<br/>
+
+
+## Validation Json with javax validation
+### Validation Dependency
+- if you use jakarta, you need add jakarta.el dependency
+- You can see Problem, Here: https://stackoverflow.com/questions/24386771/javax-validation-validationexception-hv000183-unable-to-load-javax-el-express
+```pom
+        <!-- Validation-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <!-- Version  8.0.1.Final  got jakarta.el.ExpressionFactory Exception-->
+            <version>6.0.16.Final</version>
+        </dependency>
+        <!-- Validation API -->
+        <!-- Pay attention: Need attend javax and jakarta with each version of hibernate-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+```
+
+### Validate Method
+- in method I validate Person Pojo, you can change
+- Json Example:
+  - [person.json](../../resources/json/example/person.json)
+  - [person_invalid.json](../../resources/json/example/person_invalid.json)
+
+**Custom Exception:** [PersonException.java](validation/PersonException.java)
+```java
+public class PersonException extends RuntimeException{
+  private String message;
+
+  public PersonException(String message){
+    super(message);
+    this.message = message;
+  }
+}
+```
+
+**Pojo:** [Person.java](validation/Person.java)
+```java
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.Getter;
+
+@Data
+public class Person {
+
+    private Long id;
+
+    @NotNull
+    private String name;
+
+    @Min(18) @Max(99)
+    private Integer age;
+
+    @Email
+    private String email;
+}
+```
+
+**Validate Method:**
+```java
+import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.util.Set;
+
+public static boolean validate(Person person) {
+        // Run validation
+        Validator validator = Validation.byDefaultProvider()
+                .configure()
+                .messageInterpolator(new ParameterMessageInterpolator())
+                .buildValidatorFactory()
+                .getValidator();
+
+        Set<ConstraintViolation<Person>> violations = validator.validate(person);
+
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<Person> violation : violations) {
+                System.err.println(violation.getPropertyPath() + " " + violation.getMessage());
+            }
+        } else {
+            System.out.println("Valid!");
+            return true;
+        }
+
+        throw new PersonException("Person Json is Invalid!");
+    }
+```
+
+- You can see all Test Here: [App.java](validation/App.java)
+### Javax Validation Annotation
+#### 1.Null / Not Null
+- `@Null` → value must be null.
+- `@NotNull` → value must not be null.
+```java
+class ExampleNull {
+  @Null
+  private String mustBeNull;
+
+  @NotNull
+  private String mustNotBeNull;
+} 
+```
+
+#
+#### 2. Boolean / Truth
+- `@AssertTrue` → must be true.
+- `@AssertFalse` → must be false.
+```java
+class ExampleBoolean {
+  @AssertTrue
+  private boolean active;
+
+  @AssertFalse
+  private boolean disabled;
+} 
+```
+
+#
+#### 3. Size / Length
+- `@Size(min, max)` → string, collection, map, or array must have a size within range.
+```java
+class ExampleSize {
+  @Size(min = 2, max = 10)
+  private String username;
+
+  @Size(min = 1, max = 5)
+  private List<String> tags;
+}
+```
+
+#
+#### 4. Numeric Constraints
+- `@Min(value)` → must be greater than or equal to value.
+- `@Max(value)` → must be less than or equal to value.
+- `@DecimalMin(value, inclusive = true/false)` → decimal min.
+- `@DecimalMax(value, inclusive = true/false)` → decimal max.
+- `@Digits(integer, fraction)` → number must have digits restrictions.
+
+
+```java
+class ExampleNumbers {
+    @Min(18)
+    private int age;
+
+    @Max(100)
+    private int score;
+
+    @DecimalMin("0.1")
+    private double minValue;
+
+    @DecimalMax(value = "999.99", inclusive = false)
+    private double price;
+
+    @Digits(integer = 5, fraction = 2)
+    private BigDecimal amount;
+}
+```
+
+#
+#### 5. String / Character
+* `@Pattern(regexp)` → must match regex.
+* `@Email (Hibernate Validator extension in javax)` → must be valid email.
+* `@NotBlank (Hibernate Validator extension)` → must not be null and trimmed length > 0.
+* `@NotEmpty (Hibernate Validator extension)` → must not be null or empty.
+
+```java
+class ExampleStrings {
+    @Pattern(regexp = "[a-zA-Z0-9_]+")
+    private String username;
+
+    @Email
+    private String email;
+
+    @NotBlank
+    private String password;
+
+    @NotEmpty
+    private String nickname;
+}
+```
+
+#
+#### 6. Past / Future Dates
+* `@Past` → must be a date/time in the past.
+*` @PastOrPresent` → must be past or today.
+* `@Future` → must be in the future.
+* `@FutureOrPresent` → must be future or today.
+
+```java
+import java.time.LocalDate;
+
+class ExampleDates {
+    @Past
+    private LocalDate birthDate;
+
+    @PastOrPresent
+    private LocalDate createdAt;
+
+    @Future
+    private LocalDate expiryDate;
+
+    @FutureOrPresent
+    private LocalDate scheduledDate;
+}
+```
+
+#
+#### 7. Custom Message Example
+```java
+class ExampleMessage {
+    @NotNull(message = "Name cannot be null!")
+    private String name;
+}
+```
+
+#
+#### 8. More 
+* `@Length(min, max)` → like @Size, but for strings only.
+* `@Range(min, max)` → numeric range check.
+* `@URL` → must be a valid URL.
+* `@CreditCardNumber` → must be valid credit card format.
+* `@EAN` → barcode number validation.
+* `@ISBN` → valid ISBN.
+* `@SafeHtml` (deprecated) → for sanitizing HTML.
+
+```java
+import org.hibernate.validator.constraints.*;
+
+class ExampleHibernate {
+    @Length(min = 5, max = 20)
+    private String description;
+
+    @Range(min = 1, max = 10)
+    private int rating;
+
+    @URL
+    private String website;
+
+    @CreditCardNumber
+    private String creditCard;
+}
+```
+
+#
+### Custom Validation Annotation
+- `Step 1` Create custom annotation
+- `Step 2` Implement ConstraintValidator
+- `Step 3` Use your annotation in POJO
+- `Step 4` Run Validation
+
+**Step 1:**
+```java
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.*;
+
+@Documented
+@Constraint(validatedBy = LowercaseValidator.class) // link to validator
+@Target({ ElementType.FIELD, ElementType.PARAMETER })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LowercaseOnly {
+
+    String message() default "must be lowercase letters only";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+**Step 2:**
+```java
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class LowercaseValidator implements ConstraintValidator<LowercaseOnly, String> {
+
+    @Override
+    public void initialize(LowercaseOnly constraintAnnotation) {
+        // you can read annotation parameters here if needed
+    }
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value == null) return true; // treat null as valid (use @NotNull if needed)
+        return value.matches("[a-z]+");
+    }
+}
+```
+
+**Step 3:**
+```java
+    @LowercaseOnly
+    private String code;
+```
+
+**Step 4:**
+- Run And check here: [App.java](validation%2FApp.java)
+- if Exist Uppercase
+```text
+age must be less than or equal to 99
+```

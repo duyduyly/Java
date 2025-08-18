@@ -9,10 +9,10 @@ import java.util.Map;
 public class Test {
     public static void main(String[] args) {
         // Load input JSON as Java object (Map)
-        Object inputJSON = JsonUtils.filepathToObject("src/main/resources/jolt_json/input.json");
+        Object inputJSON = JsonUtils.filepathToObject("src/main/resources/json/jolt_json/input.json");
 
         // Load Jolt spec as Java object (List)
-        List<Object> chainrSpecJSON = JsonUtils.filepathToList("src/main/resources/jolt_json/spec.json");
+        List<Object> chainrSpecJSON = JsonUtils.filepathToList("src/main/resources/json/jolt_json/spec.json");
 
         // Create Chainr transformation from spec
         Chainr chainr = Chainr.fromSpec(chainrSpecJSON);
