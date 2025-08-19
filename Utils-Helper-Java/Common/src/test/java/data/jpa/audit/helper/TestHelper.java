@@ -1,4 +1,4 @@
-package com.alan.helper;
+package data.jpa.audit.helper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

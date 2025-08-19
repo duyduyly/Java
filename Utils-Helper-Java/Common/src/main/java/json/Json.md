@@ -419,8 +419,8 @@ Alice
 ### Validate Method
 - in method I validate Person Pojo, you can change
 - Json Example:
-  - [person.json](../../resources/json/example/person.json)
-  - [person_invalid.json](../../resources/json/example/person_invalid.json)
+  - [person.json](example/person.json)
+  - [person_invalid.json](example/person_invalid.json)
 
 **Custom Exception:** [PersonException.java](validation/PersonException.java)
 ```java
