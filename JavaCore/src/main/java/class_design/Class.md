@@ -265,6 +265,8 @@ Child constructor
 
 ## 7. Constructors
 - Special methods which are called every time you create an instance of an object 
+- The access type of a default constructor is `same` as the `access type of the class`. Thus, if a `class` is `public`, the `default constructor` will be `public`. Note that you can use private and protected access modifers for nested classes only and not for top level (aka package level) classes).
+
 ```java
   public class Dog{
     

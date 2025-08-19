@@ -7,16 +7,22 @@
     <groupId>org.example</groupId>
     <artifactId>Utils-Helper-Java</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>Common</module>
+        <module>SOAP</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <docusign.version>3.21.0</docusign.version>
         <rooms.version>1.1.0</rooms.version>
         <click.version>1.2.2</click.version>
         <monitor.version>1.1.0</monitor.version>
         <admin.version>1.1.0</admin.version>
+        <gson.version>2.10.1</gson.version>
     </properties>
 
 
@@ -118,6 +124,55 @@
             <version>2.6.6</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bazaarvoice.jolt</groupId>
+            <artifactId>jolt-core</artifactId>
+            <version>0.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bazaarvoice.jolt</groupId>
+            <artifactId>json-utils</artifactId>
+            <version>0.1.6</version>
+        </dependency>
+
+        <!-- Validation-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <!-- Version  8.0.1.Final  got jakarta.el.ExpressionFactory Exception-->
+            <version>6.0.16.Final</version>
+        </dependency>
+        <!-- Validation API -->
+        <!-- Pay attention: Need attend javax and jakarta with each version of hibernate-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+
+        <!-- SOAP START-->
+        <!-- JAX-WS API -->
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!-- JAX-WS Runtime (Metro implementation) -->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <!-- SOAP END-->
+
     </dependencies>
 
     <build>
@@ -134,8 +189,8 @@
                             <version>1.18.34</version>
                         </path>
                     </annotationProcessorPaths>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

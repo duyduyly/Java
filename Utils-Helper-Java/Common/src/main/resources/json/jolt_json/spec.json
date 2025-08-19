@@ -1,0 +1,9 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "fullName",
+      "city": "location"
+    }
+  }
+]
