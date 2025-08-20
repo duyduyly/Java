@@ -8,6 +8,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.example.server.model.Address;
 import org.example.server.model.Student;
+import org.example.utils.XmlUtils;
 
 import java.util.*;
 
@@ -19,14 +20,24 @@ import java.util.*;
 )
 public class StudentServiceImpl implements StudentService {
     private final Map<Integer, Student> store = new HashMap<>();
+    private final XmlUtils<Student> xmlUtil = new XmlUtils<>();
+    private final XmlUtils<Address> addressXmlUtils = new XmlUtils<>();
 
     @Override
-    public Student createStudent(int id, String name, String city) {
-        Student student = new Student(id, name, new Address(id, city));
-        this.validate(student);
-        store.put(id, student);
-        System.out.printf("Student %s created \n", name);
-        return student;
+    public Student createStudent(int id, String name, String xmlAddress) {
+        try{
+            Address obAddress = addressXmlUtils.toObject(xmlAddress, Address.class);
+            Student student = new Student(id, name, obAddress);
+            this.validate(student);
+            store.put(id, student);
+            System.out.printf("Student %s created \n", name);
+            showStore();
+            return student;
+        }catch (Exception e){
+            e.getStackTrace();
+            System.err.println("Error While Create Student");
+        }
+        return new Student();
     }
 
     @Override
@@ -70,5 +81,15 @@ public class StudentServiceImpl implements StudentService {
                 throw new RuntimeException("Student Invalid");
             }
         }
+    }
+
+    private void showStore(){
+        System.out.println();
+        System.out.println("------------------Start--------------------");
+        store.forEach((key, value)->{
+            System.out.println(key +" | "+ value.toString());
+        });
+        System.out.println("------------------End--------------------");
+        System.out.println();
     }
 }

@@ -1,0 +1,13 @@
+package xml.model;
+
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+
+public class CDataAdapter extends XmlAdapter<String, String> {
+    @Override
+    public String marshal(String v) {
+        return "<![CDATA[" + v + "]]>";
+    }
+    @Override
+    public String unmarshal(String v) { return v; }
+}
+

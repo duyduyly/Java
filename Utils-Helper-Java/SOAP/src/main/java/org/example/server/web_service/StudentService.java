@@ -20,7 +20,7 @@ public interface StudentService {
     Student createStudent(
             @WebParam(name = "id") int id,
             @WebParam(name = "name") String name,
-            @WebParam(name = "city") String city
+            @WebParam(name = "address") String address
     );
 
     @WebMethod(operationName = "findById")
