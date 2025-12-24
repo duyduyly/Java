@@ -12,6 +12,7 @@
     <modules>
         <module>Common</module>
         <module>OrderProcess</module>
+        <module>JavaFeature</module>
     </modules>
 
     <properties>
