@@ -1,6 +1,6 @@
 ## ✅ Stream Creation Methods Summary
 
-### 📻 [Back To Home Page](../../../../Java%20Document.md)
+### 📻 [Java Document.md](../../../../../Java%20Document.md)
 
 - A source: This could be a collection, an array, a generator function, or an I/O channel.
 

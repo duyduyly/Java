@@ -1,4 +1,7 @@
 # Java 21 updated
+
+### 📻 [Back To Home Page](../../../../Java%20Document.md)
+
 1. [Pattern Matching for Switch ](#pattern-matching-for-switch)(Standard)
 2. Record Patterns (Preview)
 3. [Sequenced Collections](#sequenced-collections) (Standard)

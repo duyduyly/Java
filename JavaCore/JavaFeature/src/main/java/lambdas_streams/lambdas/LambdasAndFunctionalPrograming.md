@@ -1,7 +1,7 @@
 
 # Lambda and Functional Programing
 
-### 📻 [Back To Home Page](../../../../Java%20Document.md)
+### 📻 [Back To Home P[Java Document.md](..%2F..%2F..%2F..%2F..%2FJava%20Document.md)age](../../../../Java%20Document.md)
 
 an interface which has exactly one abstract method
 

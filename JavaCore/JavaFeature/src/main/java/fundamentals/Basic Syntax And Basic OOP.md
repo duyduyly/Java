@@ -1,6 +1,6 @@
 # 🧠 Java Basic Syntax Guide
 
-### 📻 [Back To Home Page](../../../../../Java%20Document.md)
+### 📻 [Back To Home Page](../../../../Java%20Document.md)
 
 This guide covers the essential syntax and structure of Java for beginners. It includes data types, control flow, methods, classes, and basic I/O with short explanations and examples.
 

@@ -1,5 +1,7 @@
 # what is the pipeline?
 
+### 📻 [Java Document.md](../../../../../Java%20Document.md)
+
 - A stream in java is a sequence of data
 - Stream pipeline is set of operation that run on the stream to produce the result
 - you can think of a pipeline as of an assembly line in the factory

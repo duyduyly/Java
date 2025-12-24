@@ -1,6 +1,6 @@
 # Primitive Stream
 
-### 📻 [Back To Home Page](../../../../Java%20Document.md)
+### 📻 [Java Document.md](../../../../../Java%20Document.md)
 
 | [Unique Primitive Streams Methods](#unique-primitive-streams-methods) | [Mapping Streams](#mapping-streams) | [Summarizing Statistics](#summarizing-statistics) | <br/>
 

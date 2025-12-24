@@ -1,6 +1,6 @@
 ## Intermediate Operations
 
-### 📻 [Back To Home Page](../../../../Java%20Document.md)
+### 📻 [Java Document.md](../../../../../Java%20Document.md)
 
 - An intermediate operation, such as filter, produces a new stream.
 - Produces a stream as a result

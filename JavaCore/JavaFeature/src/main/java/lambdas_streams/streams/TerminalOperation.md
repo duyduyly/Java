@@ -1,5 +1,8 @@
 ## Terminal Stream Operation
 
+### 📻 [Java Document.md](../../../../../Java%20Document.md)
+
+
 | **Method**                                                          | **when applied on infinite stream** | **Return value** | **Reduction** |
 |---------------------------------------------------------------------|-------------------------------------|------------------|---------------|
 | `count()`  [🧪](#terminal-example-1)                                | Does not terminate                  | long             | yes           |

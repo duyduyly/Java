@@ -5,6 +5,8 @@ Fast:
 - [Note](#localization-note)
 
 
+### 📻 [Back To Home Page](../../../../Java%20Document.md)
+
 ## Number Format📈
 
 Example 1:

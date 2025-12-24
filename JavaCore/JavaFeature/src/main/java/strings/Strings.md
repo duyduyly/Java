@@ -1,5 +1,8 @@
 # Strings
 
+### 📻 [Back To Home Page](../../../../Java%20Document.md)
+
+
 | [String Methods](#string-methods) | [String Builder](#string-builder) | [Comparison Between String and String builder](#comparison-between-string-and-stringbuilder) | <br/>
 | [String pool](#string-pool) |
 

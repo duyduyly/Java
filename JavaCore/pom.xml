@@ -10,8 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>Common</module>
-        <module>OrderProcess</module>
+        <module>DraftForDemo</module>
         <module>JavaFeature</module>
     </modules>
 
